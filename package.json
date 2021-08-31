@@ -1,0 +1,19 @@
+{
+  "name": "hospitalmanagement",
+  "version": "1.0.0",
+  "description": "A hospital management application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SelfDrivingAssist/HospitalManagement.git"
+  },
+  "authors": ["Lawful2002", "Ayushsunny", "5902"],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SelfDrivingAssist/HospitalManagement/issues"
+  },
+  "homepage": "https://github.com/SelfDrivingAssist/HospitalManagement#readme"
+}
