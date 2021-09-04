@@ -1,0 +1,57 @@
+<%- include('../partials/auth-head.ejs') %>
+
+<div class="main d-flex flex-column justify-content-center align-items-center">
+
+    <div class="form-cont row">
+        
+    <div class="col-6 form-part d-flex flex-column">
+
+        <img src="./images/logo.jpg" alt="logo" class="logo">
+        <div class="login-title">Login</div>
+        <div class="des">Enter your credentials to continue</div>
+
+        <form class="row">
+            <div class="col-12">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" id="email" name="email" type="email" required>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="pass">Password</label>
+                <input class="form-control" id="pass" name="pass" type="password" required>
+            </div>
+            <div class="col-12 mt-4">
+                <button class="btn btn-submit">Login</button>
+            </div>
+        </form>
+
+        <div class="des mt-4 text-center">
+            A new user?
+            <a href="/register">Register</a>
+        </div>
+
+    </div>
+    <div class="col-6 image-part"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const form = document.querySelector(".form-part");
+    window.addEventListener("resize", ()=>{
+        if(window.innerWidth <= 1024){
+            form.classList.add("col-12");
+            form.classList.remove("col-6");
+            form.classList.add("align-items-center");
+        }
+        else{
+            form.classList.add("col-6");
+            form.classList.remove("col-12");
+            form.classList.remove("align-items-center");
+        }
+    })
+
+</script>
+
+<%- include('../partials/foot.ejs') %> 
