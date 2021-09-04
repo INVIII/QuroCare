@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+body{
+    background-image: url('../assets/auth-back.png');
+    size: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    font-family: "Roboto", sans-serif;  
+}
+
+.main{
+    height: 100vh;
+}
+
+.form-cont{
+    width: 80%;
+    background-color: white;
+}
+
+.image-part{
+    background-image: url('../assets/ill_1.jpg');
+    background-size: cover;
+}
+
+.btn-submit{    
+    background-color: #4e74e9;
+    width: 100%;
+    color: white;
+}
+
+.login-title{
+    margin-top: 75px;    
+    font-size: 42pt;
+}
+
+.des{
+    color: rgba(0,0,0, 0.5);
+}
+
+.form-part{
+    padding: 13%;
+    padding-top: 40px;
+}
+
+img{
+    width: 150px;
+    height: 50px;
+}
+
+form{
+    margin-top: 50px;
+}
+
+.col-12{
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    body {
+      background-image: none;
+      background-color: #4e74e9;
+    }
+    .image-part{
+        display: none;
+    }
+    .form-part{
+        padding: 20%;
+        padding-top: 40px;
+    }
+  }
