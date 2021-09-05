@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "install": "cd server && npm install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SelfDrivingAssist/HospitalManagement.git"
   },
-  "authors": ["Lawful2002", "Ayushsunny", "Dev5902"],
+  "authors": [
+    "Lawful2002",
+    "Ayushsunny",
+    "Dev5902"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SelfDrivingAssist/HospitalManagement/issues"
