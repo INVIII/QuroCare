@@ -27,10 +27,9 @@
               required
             />
           </div>
-        </div>
-        <br />
+        </div>        
         <div class="row">
-          <div class="form-floating mb-3 col-lg-12">
+          <div class="form-floating col-lg-12">
             <label for="Email">Email</label>
             <input
               type="email"
@@ -87,28 +86,24 @@
               required
             />
           </div>
-        </div>
-        <br />
-        <div class="d-grid">
+        </div>        
+        <div class="mt-4">
           <button class="btn btn-submit" type="submit">Register</button>
           <div class="des mt-4 text-center">
             Already Registered?
             <a href="/login">Login</a>
           </div>
         </div>
-      </form>
-      <!-- <div class="alert alert-danger text-center" role="alert">
-        Your passwords do not match
-      </div> -->
+      </form>     
     </div>
     <div class="col-6 image-part"></div>
   </div>
 </div>
 
 <script>
-  const form = document.querySelector(".form-part");
+  const form = document.querySelector(".reg");
   window.addEventListener("resize", () => {
-    if (window.innerWidth <= 1024) {
+    if (window.innerWidth <= 1200) {
       form.classList.add("col-12");
       form.classList.remove("col-6");
       form.classList.add("align-items-center");

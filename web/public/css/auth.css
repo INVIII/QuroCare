@@ -59,11 +59,11 @@ form {
   margin-top: 50px;
 }
 
-.col-12 {
+.col-12, .col-lg-12, .col-lg-6 {
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1200px) {
   body {
     background-image: none;
     background-color: #4e74e9;
