@@ -141,10 +141,14 @@ body {
       color: #444; }
 
 .btn-success {
+  font-weight: 600;
   background-color: #4e74e9;
   border-color: #4e74e9; }
+  #btxt{
+    color: rgb(255, 255, 255);
+  }
   .btn-success:hover {
-    background-color: #4e74e9 !important;
+    background-color: rgb(38, 75, 184) !important;
     border-color: #4e74e9 !important; }
   .btn-success:active {
     background-color: #4e74e9 !important;
@@ -153,7 +157,7 @@ body {
     background-color: #4e74e9 !important;
     border-color: #4e74e9 !important;
     box-shadow: none !important; }
-
+ 
 .btn-info {
   background-color: #4e74e9;
   border-color: #4e74e9; }
@@ -304,6 +308,10 @@ header {
     background-color: #FFF;
     color: #444;
     font-weight: 600; }
+
+  .btn-default:hover {
+      background-color: rgb(219, 221, 226);
+    }
     @media screen and (max-width: 792px) {
       .slider-detail .btn-default {
         padding: 5px;
@@ -472,11 +480,17 @@ header {
 
 /* ===================================== Fooer CSS ================================== */
 .footer {
-  padding: 80px 50px;
-  padding: 30px;
-  padding-bottom: 25px;
+  padding: 15px 50px;
   background-color: #444;
   color: #FFF; }
+  .abtus{
+    max-width: 12%;
+  }
+  @media screen and (max-width: 768px) {
+    .abtus{
+      max-width: 100%;
+    }
+  }
   @media screen and (max-width: 940px) {
     .footer {
       padding: 50px 10px; } }
@@ -499,7 +513,9 @@ header {
     padding-left: 20px; }
   .footer address a {
     color: #FFF; }
-
+  .spacer{
+    width: 100%;
+  }
 .copy {
   padding: 20px;
   background-color: #4e74e9;
