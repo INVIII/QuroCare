@@ -39,6 +39,8 @@ body {
 .login-title {
   margin-top: 75px;
   font-size: 42pt;
+  border-color: black;
+  border-bottom-style: solid;
 }
 
 .des {
@@ -59,7 +61,9 @@ form {
   margin-top: 50px;
 }
 
-.col-12, .col-lg-12, .col-lg-6 {
+.col-12,
+.col-lg-12,
+.col-lg-6 {
   margin-top: 10px;
 }
 
