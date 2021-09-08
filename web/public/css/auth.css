@@ -8,11 +8,13 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
+  z-index: 0;
   font-family: "Source Sans Pro", sans-serif;
 }
 
 .main {
   height: 100vh;
+  z-index: 20;
 }
 
 .reg {
@@ -22,7 +24,23 @@ body {
 
 .form-cont {
   width: 80%;
+  z-index: 20;
   background-color: white;
+}
+
+.appbook{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-image: url("../assets/auth-back.png");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+    -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .image-part {
