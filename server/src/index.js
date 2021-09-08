@@ -11,5 +11,5 @@ app.use(express.static(path.join(__dirname, '..', '..', 'web', 'public')))
 app.use('/', mainRoutes)
 
 app.listen(3000, () => {
-  console.log('Server running')
+  console.log('Server running @ http://localhost:3000/')
 })
