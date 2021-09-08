@@ -6,20 +6,58 @@
     <div class="form-cont row">
               <div class="col-6 image-part"></div>
 
-      <div class="col-6 reg d-flex flex-column">
+      <div class="apt col-6 reg d-flex flex-column">
         <img src="./images/toplogo.png" alt="logo" class="logo" />
-        <div class="login-title text-center">Register</div>
+        <div class="login-title text-center">Appointment</div>
         <form>
-          <!-- <div class="row">
+
+          <div class="row">
+          <div class="form-floating col-lg-6 ">
+            <label for="OPD" >OPD</label>
+            <select class="form-select form-control" id="OPD" required>
+              <option selected>OPD</option> 
+              <option value="1">Cardiology</option>
+              <option value="2">Orthopaedic</option>
+              <option value="3">Neurologist</option>
+              <option value="4">Pharmacology</option>
+              <option value="5">Otorhinolaryngology</option>
+              <option value="6">Psychiatry</option>
+            </select>
+          </div>
+
+          <div class="form-floating col-lg-6 ">
+            <label for="Doctors" >Doctors</label>
+            <select class="form-select form-control" id="OPD" required>
+              <option selected>Doctors</option>
+              <optgroup label="Cardiology"> 
+              <option value="1">Cardiology</option>
+              <option value="2">Orthopaedic</option>
+              <option value="3">Neurologist</option>
+              <option value="4">Pharmacology</option>
+              <option value="5">Otorhinolaryngology</option>
+              <option value="6">Psychiatry</option>
+            </optgroup>
+            </select>
+          </div>
+         </div>
+
+          <div class="row">
             <div class="form-floating col-lg-6">
-              <label for="fName">First Name</label>
-              <input type="text" class="form-control" id="fName" placeholder="eg. Dev" required />
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" required />
             </div>
+
             <div class="form-floating col-lg-6">
-              <label for="LName">Last Name</label>
-              <input type="text" class="form-control" id="LName" placeholder="eg. Sharma" required />
+            <label for="Time" >Timings</label>
+            <select class="form-select form-control" id="Time" required>
+              <option selected>--:-- --</option> 
+              <option value="1">9:30 AM</option>
+              <option value="2">12:30 PM</option>
+              <option value="3">3:30 PM</option>
+              <option value="4">5:00 PM</option>
+            </select>
             </div>
-          </div> -->
+          </div>
 
           <div class="row">
             <div class="form-floating col-lg-12">
@@ -27,37 +65,33 @@
               <input type="text" class="form-control" id="address" placeholder="eg. 122, downing street" required />
             </div>
           </div>
+
           <div class="row">
             <div class="form-floating col-lg-6">
               <label for="Phone"> Phone</label>
               <input type="text" id="Phone" class="form-control" placeholder="+91 9999 99 9999" required />
             </div>
+
             <div class="form-floating col-lg-6">
-              <label for="Gender" class="form-check-label">Gender</label><br />
-              <select class="form-select form-control" style="height: 34px; margin-top: 7px" id="Gender" required>
-                <option selected>Male</option>
-                <option value="1">Female</option>
-                <option value="2">Non-binary</option>
+              <label for="age" >Your Age</label>
+              <select class="form-select form-control" id="age" required>
+                <option selected>Age</option> 
+                <option value="1">0-6y</option>
+                <option value="2">6-18y</option>
+                <option value="3">18-45y</option>
+                <option value="4">45+</option>
               </select>
+              </div>
+
             </div>
-          </div>
-          <!-- <div class="row">
-            <div class="form-floating col-lg-6">
-              <label for="Password">Password</label>
-              <input type="password" class="form-control" id="Password" placeholder="Password" required />
+
+            <div class="input-group mt-4">
+              <span class="input-group-text">Comments!</span>
+              <textarea class="form-control" aria-label="With textarea"></textarea>
             </div>
-            <div class="form-floating col-lg-6">
-              <label for="rePassword">Re-enter Password</label>
-              <input type="password" class="form-control" id="rePassword" placeholder="Re-enter Password" required />
-            </div>
-          </div> -->
 
           <div class="mt-4">
-            <button class="btn btn-submit" type="submit">Register</button>
-            <div class="des mt-4 text-center">
-              Already Registered?
-              <a href="/login">Login</a>
-            </div>
+            <button class="btn btn-primary" type="submit">Next</button>
           </div>
         </form>
       </div>
