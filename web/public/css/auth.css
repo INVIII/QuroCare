@@ -25,7 +25,8 @@ body {
 .form-cont {
   width: 80%;
   z-index: 20;
-  background-color: white;
+  background-color: rgb(248, 248, 249);
+
 }
 
 .appbook{
@@ -48,21 +49,17 @@ body {
   background-size: cover;
 }
 
-.btn-submit {
+.btn-primary {
   background-color: #4e74e9;
   width: 100%;
   color: white;
 }
 
+
 .login-title {
   margin-top: 75px;
   font-size: 42pt;
   font-weight: 600;
-  /* border: #4e74e9 5px solid; */
-  /* box-shadow: inset 0 0 20px #59aff5;
-  background-color: azure;
-  border-radius: 20px;
-  color:#434344 */
   border-bottom-style: solid;
 }
 
@@ -123,11 +120,9 @@ form {
 
 /* Appointment bookapp CSS starts here  */
 
-.apt {
+.form-cont {
 
-  border: #4e74e9 5px solid;
-  box-shadow: inset 0 0 20px #59aff5;
-  background-color: azure;
+  box-shadow: -5px 5px 5px 2px rgba(11, 12, 20, 0.2);
   border-radius: 0px;
   color:#434344
 
