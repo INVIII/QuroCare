@@ -1,0 +1,97 @@
+<%- include('../partials/auth-head.ejs') %>
+
+  <button onclick="location.href='/' " class="btn1"><i class="fa fa-home"></i></button>
+  <div class="appbook"></div>
+  <div class="main d-flex flex-column justify-content-center align-items-center ">
+    <div class="form-cont row">
+              <div class="col-6 image-part"></div>
+
+      <div class="col-6 reg d-flex flex-column">
+        <img src="./images/toplogo.png" alt="logo" class="logo" />
+        <div class="login-title text-center">Register</div>
+        <form>
+          <!-- <div class="row">
+            <div class="form-floating col-lg-6">
+              <label for="fName">First Name</label>
+              <input type="text" class="form-control" id="fName" placeholder="eg. Dev" required />
+            </div>
+            <div class="form-floating col-lg-6">
+              <label for="LName">Last Name</label>
+              <input type="text" class="form-control" id="LName" placeholder="eg. Sharma" required />
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div class="form-floating col-lg-12">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" placeholder="eg. 122, downing street" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-floating col-lg-6">
+              <label for="Phone"> Phone</label>
+              <input type="text" id="Phone" class="form-control" placeholder="+91 9999 99 9999" required />
+            </div>
+            <div class="form-floating col-lg-6">
+              <label for="Gender" class="form-check-label">Gender</label><br />
+              <select class="form-select form-control" style="height: 34px; margin-top: 7px" id="Gender" required>
+                <option selected>Male</option>
+                <option value="1">Female</option>
+                <option value="2">Non-binary</option>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="form-floating col-lg-6">
+              <label for="Password">Password</label>
+              <input type="password" class="form-control" id="Password" placeholder="Password" required />
+            </div>
+            <div class="form-floating col-lg-6">
+              <label for="rePassword">Re-enter Password</label>
+              <input type="password" class="form-control" id="rePassword" placeholder="Re-enter Password" required />
+            </div>
+          </div> -->
+
+          <div class="mt-4">
+            <button class="btn btn-submit" type="submit">Register</button>
+            <div class="des mt-4 text-center">
+              Already Registered?
+              <a href="/login">Login</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const form = document.querySelector(".reg");
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
+
+    var password = document.getElementById("Password"),
+      confirm_password = document.getElementById("rePassword");
+
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity("");
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  </script>
+
+  <%- include('../partials/foot.ejs') %>
