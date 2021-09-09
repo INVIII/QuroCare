@@ -1,20 +1,15 @@
 <%- include('../partials/dash-head.ejs') %>
 
-<body class="fixed-nav sticky-footer bg-dark side-nav" id="page-top">
+<!-- <body class="fixed-nav sticky-footer side-nav" id="page-top"> -->
     
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top side-nav" id="mainNav">
 
         <img src="./images/toplogo.png" class="logo">
 
-
-
         <div class="collapse navbar-collapse" id="navbarResponsive">
 
-
-
-
-            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion" style="margin-top: 100px;">
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link" href="/">
@@ -312,7 +307,7 @@
                 <div class="col-lg-4">
 
                     <!-- Example Notifications Card-->
-                    <div class="card mb-3 card1">
+                    <div class="card mb-3 card1" style="margin-left: -15px !important;">
                         <div class="card-header">
                            
                             <a class="list-group-item list-group-item-action" href="#">
@@ -352,7 +347,7 @@
             </div>
             <!-- Example DataTables Card-->
 
-            <div class="dat-tab card mb-3">
+            <div class="dat-tab card mb-3 dash-table">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Data Table Example
                 </div>
@@ -419,13 +414,13 @@
         </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
-        <footer class="sticky-footer">
+        <!-- <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
                     <small>All Rights Reserved &copy; 2021 | QURO CARE</small>
                 </div>
             </div>
-        </footer>
+        </footer> -->
         <!-- Logout Modal-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -440,7 +435,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/login">Logout</a>
+                        <a class="btn btn-primary " href="/login">Logout</a>
                     </div>
                 </div>
             </div>
