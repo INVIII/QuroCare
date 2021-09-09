@@ -6,7 +6,7 @@
 
     <div class="form-cont row">
         
-    <div class="col-6 form-part d-flex flex-column">
+    <div class="reg col-6 d-flex flex-column">
 
         <img src="./images/toplogo.png" alt="logo" class="logo">
         <div class="login-title text-center">Login</div>
@@ -39,19 +39,18 @@
 
 <script>
 
-    const form = document.querySelector(".form-part");
-    window.addEventListener("resize", ()=>{
-        if(window.innerWidth <= 1024){
-            form.classList.add("col-12");
-            form.classList.remove("col-6");
-            form.classList.add("align-items-center");
-        }
-        else{
-            form.classList.add("col-6");
-            form.classList.remove("col-12");
-            form.classList.remove("align-items-center");
-        }
-    })
+const form = document.querySelector(".reg");
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
 
 </script>
 

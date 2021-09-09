@@ -15,28 +15,37 @@
           <div class="form-floating col-lg-6 ">
             <label for="OPD" >OPD</label>
             <select class="form-select form-control" id="OPD" required>
-              <option selected>OPD</option> 
-              <option value="1">Cardiology</option>
-              <option value="2">Orthopaedic</option>
-              <option value="3">Neurologist</option>
-              <option value="4">Pharmacology</option>
-              <option value="5">Otorhinolaryngology</option>
-              <option value="6">Psychiatry</option>
+              <option selected>Select a department</option> 
+              <option value="Cardiology">Cardiology</option>
+              <option value="Orthopaedic">Orthopaedic</option>
+              <option value="Neurologist">Neurologist</option>
+              <option value="Pharmacology">Pharmacology</option>
+              <option value="Otorhinolaryngology">Otorhinolaryngology</option>
+              <option value="Psychiatry">Psychiatry</option>
             </select>
           </div>
 
           <div class="form-floating col-lg-6 ">
             <label for="Doctors" >Doctors</label>
             <select class="form-select form-control" id="OPD" required>
-              <option selected>Doctors</option>
-              <optgroup label="Cardiology"> 
+              <option selected value="placeholder">Select a doctor</option>              
+              <!-- <optgroup label="Cardiol" class="visually-hidden"> 
               <option value="1">Cardiology</option>
               <option value="2">Orthopaedic</option>
               <option value="3">Neurologist</option>
               <option value="4">Pharmacology</option>
               <option value="5">Otorhinolaryngology</option>
               <option value="6">Psychiatry</option>
-            </optgroup>
+            </optgroup> -->
+
+            <% for (let i of departments) { %>
+              <optgroup label="<%= i.name %>" class="hide group">
+                <% for( let j of i.doctors ) { %>
+                  <option value="<%= j.name %> "><%= j.name %> </option>
+                <% } %>
+                </optgroup>
+            <% } %>
+
             </select>
           </div>
          </div>
@@ -111,21 +120,29 @@
         form.classList.remove("col-12");
         form.classList.remove("align-items-center");
       }
-    });
+    });    
 
-    var password = document.getElementById("Password"),
-      confirm_password = document.getElementById("rePassword");
+    // validation
 
-    function validatePassword() {
-      if (password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords Don't Match");
-      } else {
-        confirm_password.setCustomValidity("");
+    const groups = document.querySelectorAll(".group")
+    const opd = document.querySelector("#OPD");
+
+    opd.addEventListener("change", ()=>{      
+
+      const val = opd.value;   
+
+      for(let i of groups){
+        if(i.label === val){
+          console.log("Show")
+          i.classList.remove("hide");
+        }
+        else{
+          i.classList.add("hide");
+        }
       }
-    }
 
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
+    })
+
   </script>
 
   <%- include('../partials/foot.ejs') %>
