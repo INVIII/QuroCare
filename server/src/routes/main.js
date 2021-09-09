@@ -17,5 +17,9 @@ router.get('/appointment', (req, res) => {
   res.render('./pages/bookapp')
 })
 
+router.get('/dashboard', (req, res) => {
+  res.render('./pages/dash')
+})
+
 
 module.exports = router
