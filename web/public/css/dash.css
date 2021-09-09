@@ -416,3 +416,18 @@ footer.sticky-footer {
     z-index: 1000;
     box-shadow: -3px 3px 2px 2px rgba(11, 12, 20, 0.2);
   }
+
+.logo{
+    width: 200px;
+    height: 35.8px;
+    margin-right: 50%;
+    box-shadow: 3px 3px 2px 2px rgba(39, 39, 39, 0.349);
+}
+
+.dark{
+    color: #212529;
+}
+
+.side-nav{
+    box-shadow: 3px 3px 2px 2px rgba(39, 39, 39, 0.349);
+}

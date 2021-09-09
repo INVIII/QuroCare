@@ -1,5 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
+const json = require(path.join(__dirname, '..', '..', 'proxy.json'))
+
+const { departments } = json
 
 router.get('/', (req, res) => {
   res.render('./pages/home')
@@ -14,12 +18,11 @@ router.get('/register', (req, res) => {
 })
 
 router.get('/appointment', (req, res) => {
-  res.render('./pages/bookapp')
+  res.render('./pages/bookapp', { departments })
 })
 
 router.get('/dashboard', (req, res) => {
   res.render('./pages/dash')
 })
-
 
 module.exports = router

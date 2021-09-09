@@ -88,7 +88,7 @@ form {
 }
 
 @media only screen and (max-width: 1200px) {
-  body {
+  body, .appbook {
     background-image: none;
     background-color: #4e74e9;
   }
@@ -126,4 +126,12 @@ form {
   border-radius: 0px;
   color:#434344
 
+}
+
+.hide{
+  display: none;
+}
+
+.logo{
+  box-shadow: 3px 3px 2px 2px rgba(39, 39, 39, 0.349);
 }

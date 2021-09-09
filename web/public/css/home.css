@@ -6,6 +6,10 @@
   font-family: 'mouse-500';
   src: url("../fonts/PT_Sans-Web-Bold.ttf") format("truetype"); }
 /* ===================================== Basic CSS ================================== */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -418,7 +422,9 @@ header {
 /*====================================== About Us Style ====================================*/
 .about-us .image-bg {
   background-image: url(../images/why.jpg);
-  background-size: contain; }
+  background-size: contain; 
+  background-repeat: no-repeat;
+}
 .about-us .abut-yoiu {
   padding: 50px;
   background-color: #FFF; }
@@ -537,3 +543,7 @@ header {
     box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35); }
 
 /*# sourceMappingURL=style.css.map */
+
+.logo{
+  box-shadow: 3px 3px 2px 2px rgba(39, 39, 39, 0.349);
+}
