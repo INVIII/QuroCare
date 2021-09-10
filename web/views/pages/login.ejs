@@ -1,57 +1,65 @@
 <%- include('../partials/auth-head.ejs') %>
 
-<button onclick="location.href='/' " class="btn1"><i class="fa fa-home"></i></button>
+<button onclick="location.href='/' " class="btn1">
+  <i class="fa fa-home"></i>
+</button>
 
 <div class="main d-flex flex-column justify-content-center align-items-center">
-
-    <div class="form-cont row">
-        
+  <div class="form-cont row">
     <div class="reg col-6 d-flex flex-column">
+      <img src="./images/toplogo.png" alt="logo" class="logo" />
+      <div class="login-title text-center">Login</div>
 
-        <img src="./images/toplogo.png" alt="logo" class="logo">
-        <div class="login-title text-center">Login</div>
-
-        <form class="row">
-            <div class="col-12">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" name="email" type="email" placeholder="devsharma@gmail.com" required>
-            </div>
-            <div class="col-12">
-                <label class="form-label" for="pass">Password</label>
-                <input class="form-control" id="pass" name="pass" type="password" placeholder="Password" required>
-            </div>
-            <div class="col-12 mt-4">
-                <button class="btn btn-primary">Login</button>
-            </div>
-        </form>
-
-        <div class="des mt-4 text-center">
-            A new user?
-            <a href="/register">Register</a>
+      <form class="row">
+        <div class="col-12">
+          <label class="form-label" for="email">Email</label>
+          <input
+            class="form-control"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="devsharma@gmail.com"
+            required
+          />
         </div>
+        <div class="col-12">
+          <label class="form-label" for="pass">Password</label>
+          <input
+            class="form-control"
+            id="pass"
+            name="pass"
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="col-12 mt-4">
+          <button class="btn btn-primary">Login</button>
+        </div>
+      </form>
 
+      <div class="des mt-4 text-center">
+        A new user?
+        <a href="/register">Register</a>
+      </div>
     </div>
     <div class="col-6 image-part"></div>
-
-    </div>
-
+  </div>
 </div>
 
 <script>
-
-const form = document.querySelector(".reg");
-    window.addEventListener("resize", () => {
-      if (window.innerWidth <= 1200) {
-        form.classList.add("col-12");
-        form.classList.remove("col-6");
-        form.classList.add("align-items-center");
-      } else {
-        form.classList.add("col-6");
-        form.classList.remove("col-12");
-        form.classList.remove("align-items-center");
-      }
-    });
-
+  const form = document.querySelector(".reg");
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  });
 </script>
 
-<%- include('../partials/foot.ejs') %> 
+<%- include('../partials/foot.ejs') %>
