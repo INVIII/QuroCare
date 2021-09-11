@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router()
-// const path = require('path')
-// const json = require(path.join(__dirname, '..', '..', 'proxy.json'))
 
 const mysql = require('mysql')
 
@@ -39,14 +37,18 @@ router.get('/appointment', (req, res) => {
         }
       }
     }
-    res.render('./pages/bookapp', { departments })
+    res.render('./pages/appointment', { departments })
   })
+})
+
+router.post('/appointment', (req, res) => {
+  console.log('YOOOOOOOO')
 })
 
 router.get('/dashboard', (req, res) => {
   res.render('./pages/dash')
 })
 
-router.get('/admindash', (req, res) => [res.render('./pages/admindash')])
+router.get('/admin', (req, res) => [res.render('./pages/admin')])
 
 module.exports = router
