@@ -22,7 +22,7 @@ router.get('/appointment', (req, res) => {
 })
 
 router.get('/dashboard', (req, res) => {
-  res.render('./pages/dash')
+  res.render('./pages/doctordash')
 })
 
 router.get("/admindash", (req, res) => [res.render("./pages/admindash")]);
