@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to hospitalmanagement 👋</h1>
+<h1 align="center">Welcome to Quro Care 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/SelfDrivingAssist/HospitalManagement#readme" target="_blank">
@@ -36,7 +36,7 @@ npm run test
 
 ## Author
 
-* Github: [@SelfDrivingAssist](https://github.com/SelfDrivingAssist)
+* Github: [@INVII](https://github.com/INVIII)
 
 ## 🤝 Contributing
 
