@@ -25,6 +25,10 @@ router.get('/dashboard', (req, res) => {
   res.render('./pages/doctordash')
 })
 
+router.get('/patdash', (req, res) => {
+  res.render('./pages/patientdash')
+})
+
 router.get("/admindash", (req, res) => [res.render("./pages/admindash")]);
 
 module.exports = router
