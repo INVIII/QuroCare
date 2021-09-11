@@ -1,7 +1,5 @@
 <%- include('../partials/dash-head.ejs') %>
 
-  <!-- <body class="fixed-nav sticky-footer side-nav" id="page-top"> -->
-
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top side-nav" id="mainNav">
     <img src="/images/toplogo.png" class="logo" />
@@ -20,16 +18,16 @@
               <span class="nav-link-text">Dashboard</span>
           </a>
       </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+        <a class="nav-link" href="index.html">
+          <i class="fa fa-fw fa-file-pdf-o"></i>
+          <span class="nav-link-text">My Reports</span>
+        </a>
+      </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="addPatient">
           <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-wheelchair"></i>
-            <span class="nav-link-text">Add Patient</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Add Schedule</span>
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">settings</span>
           </a>
         </li>
       </ul>
@@ -166,9 +164,9 @@
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-hotel fa-3x"></i>
+                <i class="fa fa-calendar fa-3x"></i>
               </div>
-              <div class="mr-5"><h4>13 Patients Admitted</h4></div>
+              <div class="mr-5"><h4>New Booking?</h4></div>
             </div>
 
           </div>
@@ -177,9 +175,9 @@
           <div class="card text-white bg-warning o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-child fa-3x"></i>
+                <i class="fa fa-arrow-left fa-3x"></i>
               </div>
-              <div class="mr-5"><h4>5 Patients Waiting</h4></div>
+              <div class="mr-5"><h4>Previous Checkups</h4></div>
             </div>
 
           </div>
@@ -190,7 +188,7 @@
               <div class="card-body-icon">
                 <i class="fa fa-hospital-o fa-3x"></i>
               </div>
-              <div class="mr-5"><h4>3 Free Beds!</h4></div>
+              <div class="mr-5"><h4>Free Beds!</h4></div>
             </div>
 
           </div>
@@ -202,91 +200,91 @@
       <!-- Table with patients in rooms-->
       <div class="row" style="margin-top: 50px">
         <div class="table-responsive col-md-6">
-          <h4>Admitted Patients</h4>
+          <h4>Upcoming Checkups</h4>
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Disease</th>
+                <th>Sr No.</th>
+                <th>Department</th>
+                <th>Doctor</th>
                 <th>Date</th>
+                <th>Disease</th>
+                <th>Prescription</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
-                <td>18-45y</td>
-                <td>Male</td>
+                <td>1.</td>
+                <td>Psychatry</td>
+                <td>Dr. Chaman Chutiya</td>
+                <td>22/11/2021</td>
                 <td>PTSD</td>
-                <td>12/03/2021</td>
+                <td>Don't panic until you meet your assigned Doctor</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
-                <td>18-45y</td>
-                <td>Male</td>
+                <td>1.</td>
+                <td>Psychatry</td>
+                <td>Dr. Chaman Chutiya</td>
+                <td>22/11/2021</td>
                 <td>PTSD</td>
-                <td>12/03/2021</td>
+                <td>Don't panic until you meet your assigned Doctor</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
-                <td>18-45y</td>
-                <td>Male</td>
+                <td>1.</td>
+                <td>Psychatry</td>
+                <td>Dr. Chaman Chutiya</td>
+                <td>22/11/2021</td>
                 <td>PTSD</td>
-                <td>12/03/2021</td>
+                <td>Don't panic until you meet your assigned Doctor</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
-                <td>18-45y</td>
-                <td>Male</td>
+                <td>1.</td>
+                <td>Psychatry</td>
+                <td>Dr. Chaman Chutiya</td>
+                <td>22/11/2021</td>
                 <td>PTSD</td>
-                <td>12/03/2021</td>
+                <td>Don't panic until you meet your assigned Doctor</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
-                <td>18-45y</td>
-                <td>Male</td>
+                <td>1.</td>
+                <td>Psychatry</td>
+                <td>Dr. Chaman Chutiya</td>
+                <td>22/11/2021</td>
                 <td>PTSD</td>
-                <td>12/03/2021</td>
+                <td>Don't panic until you meet your assigned Doctor</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="table-responsive col-md-4">
-          <h4>Patients Waiting</h4>
+          <h4>Past Checkups</h4>
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Patient #</th>
-                <th>Name</th>
+                <th>Doctor </th>
+                <th>Disease</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
+                <td>Dr. Jhatu Lal</td>
+                <td>Covid-19</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
+                <td>Dr. Jhatu Lal</td>
+                <td>Covid-19</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
+                <td>Dr. Jhatu Lal</td>
+                <td>Covid-19</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
+                <td>Dr. Jhatu Lal</td>
+                <td>Covid-19</td>
               </tr>
               <tr>
-                <td>Ayush Anand</td>
-                <td>Mumbai, Maharashtra</td>
+                <td>Dr. Jhatu Lal</td>
+                <td>Covid-19</td>
               </tr>
             </tbody>
           </table>
