@@ -1,5 +1,5 @@
 {
-  "name": "hospitalmanagement",
+  "name": "qurocare",
   "version": "1.0.0",
   "description": "A hospital management application",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SelfDrivingAssist/HospitalManagement.git"
+    "url": "git+https://github.com/INVIII/QuroCare.git"
   },
   "authors": [
     "Lawful2002",
@@ -19,7 +19,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SelfDrivingAssist/HospitalManagement/issues"
+    "url": "https://github.com/INVIII/QuroCare/issues"
   },
-  "homepage": "https://github.com/SelfDrivingAssist/HospitalManagement#readme"
+  "homepage": "https://github.com/INVIII/QuroCare#readme"
 }
