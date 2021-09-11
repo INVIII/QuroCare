@@ -39,9 +39,8 @@ router.get('/appointment', (req, res) => {
         }
       }
     }
+    res.render('./pages/bookapp', { departments })
   })
-
-  res.send(departments)
 })
 
 router.get('/dashboard', (req, res) => {

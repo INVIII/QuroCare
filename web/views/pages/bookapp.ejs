@@ -21,28 +21,19 @@
               <option value="Orthopaedic">Orthopaedic</option>
               <option value="Neurologist">Neurologist</option>
               <option value="Pharmacology">Pharmacology</option>
-              <option value="Otorhinolaryngology">Otorhinolaryngology</option>
+              <option value="Physiology">Physiology</option>
               <option value="Psychiatry">Psychiatry</option>
             </select>
           </div>
 
           <div class="form-floating col-lg-6">
-            <label for="Doctors">Doctors</label>
-            <select class="form-select form-control" id="OPD" required>
+            <label for="doctors">Doctors</label>
+            <select class="form-select form-control" id="doctors" required>
               <option selected value="placeholder">Select a doctor</option>
-              <!-- <optgroup label="Cardiol" class="visually-hidden"> 
-              <option value="1">Cardiology</option>
-              <option value="2">Orthopaedic</option>
-              <option value="3">Neurologist</option>
-              <option value="4">Pharmacology</option>
-              <option value="5">Otorhinolaryngology</option>
-              <option value="6">Psychiatry</option>
-            </optgroup> -->
-
               <% for (let i of departments) { %>
               <optgroup label="<%= i.name %>" class="hide group">
                 <% for( let j of i.doctors ) { %>
-                <option value="<%= j.name %> "><%= j.name %></option>
+                <option value="<%= j.name + ' ' + j.fees %> "><%= j.name %></option>
                 <% } %>
               </optgroup>
               <% } %>
@@ -111,7 +102,7 @@
         </div>
 
         <div class="mt-4">
-          <button class="btn btn-primary" type="submit">Next</button>
+          <button class="btn btn-primary disabled nextBtn" type="submit">Pay &#8377;<span class="fees">0</span> and continue</button>
         </div>
       </form>
     </div>
@@ -133,12 +124,14 @@
   });
 
   // validation
-
+  const fees = document.querySelector(".fees");
+  const doctor = document.querySelector("#doctors");
+  const nextBtn = document.querySelector(".nextBtn");
   const groups = document.querySelectorAll(".group");
   const opd = document.querySelector("#OPD");
 
   opd.addEventListener("change", () => {
-    const val = opd.value;
+    const val = opd.value;  
 
     for (let i of groups) {
       if (i.label === val) {
@@ -148,7 +141,21 @@
         i.classList.add("hide");
       }
     }
-  });
+  });  
+
+  doctor.addEventListener("change", ()=>{
+    if(doctor.value != 'placeholder'){
+      nextBtn.classList.remove('disabled');
+      const val = doctor.value.split(" ");
+      fees.innerText = val[2];
+    }
+    else {
+      nextBtn.classList.add('disabled');
+      fees.innerText = 0;
+    }
+  })
+
+
 </script>
 
 <%- include('../partials/foot.ejs') %>
