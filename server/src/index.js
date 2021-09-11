@@ -4,8 +4,6 @@ const path = require('path')
 const mainRoutes = require('./routes/main.js')
 const doctorRoutes = require('./routes/doctorRoutes.js')
 
-// msql connection
-
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', '..', 'web', 'views'))
 
