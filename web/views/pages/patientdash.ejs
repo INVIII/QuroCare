@@ -32,6 +32,12 @@
                 </li>
             </ul>
 
+            <ul class="navbar-nav sidenav-toggler text-center">
+                <li class="nav-item">
+               <%= patient.fname %>&nbsp;<%= patient.lname %>
+                </li>
+            </ul>
+
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item dropdown">
@@ -342,7 +348,7 @@
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">
                                 Cancel
                             </button>
-                            <a class="btn btn-primary" href="/login">Logout</a>
+                            <a class="btn btn-primary" href="/patient/login">Logout</a>
                         </div>
                     </div>
                 </div>

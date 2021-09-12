@@ -1,7 +1,0 @@
-{    
-    "patients" : [{"fname" : "P1", "lname" : "L1", "gender" : "male"}, {"fname" : "P2", "lname" : "L2", "gender" : "female"}, {"fname" : "P3", "lname" : "L3", "gender" : "non-binary"},{"fname" : "P4", "lname" : "L4", "gender" : "male"}],
-    "departments" : [{"name" : "Cardiology", "doctors": [{"name" : "Dev"}, {"name" : "Ayush"}, {"name" : "Harsh"}, {"name" : "Lassan"}]}, 
-    {"name" : "Orthopaedic", "doctors": [{"name" : "John"}, {"name" : "Depp"}, {"name" : "Harry"}, {"name" : "Tom"}]},
-    {"name" : "Neurologist", "doctors": [{"name" : "Johnny"}, {"name" : "Dipper"}, {"name" : "Harny"}, {"name" : "Tommy"}]}]
-}
-  
