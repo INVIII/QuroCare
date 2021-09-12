@@ -22,6 +22,7 @@ router.post('/login', (req, res) => {
       if (password === pass) {
         res.render('./pages/patientdash')
       } else {
+        console.log('Wrong Password')
         res.redirect('/patient/login')
       }
     }
