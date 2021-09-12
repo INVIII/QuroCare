@@ -10,9 +10,9 @@
       <img src="./images/toplogo.png" alt="logo" class="logo" />
       <div class="login-title text-center">Login</div>
 
-      <form class="row">
+      <form class="row" action="/login" method="POST">
         <div class="col-12">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email" name="email">Email</label>
           <input
             class="form-control"
             id="email"
@@ -23,7 +23,7 @@
           />
         </div>
         <div class="col-12">
-          <label class="form-label" for="pass">Password</label>
+          <label class="form-label" for="pass" name="pass">Password</label>
           <input
             class="form-control"
             id="pass"

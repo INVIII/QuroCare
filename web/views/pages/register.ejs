@@ -9,7 +9,7 @@
     <div class="col-6 reg d-flex flex-column">
       <img src="./images/toplogo.png" alt="logo" class="logo" />
       <div class="login-title text-center">Register</div>
-      <form>
+      <form action="/register" method="POST">
         <div class="row">
           <div class="form-floating col-lg-6">
             <label for="fName">First Name</label>
@@ -19,6 +19,7 @@
               id="fName"
               placeholder="eg. Dev"
               required
+              name="fname"
             />
           </div>
           <div class="form-floating col-lg-6">
@@ -29,6 +30,7 @@
               id="LName"
               placeholder="eg. Sharma"
               required
+              name="lname"
             />
           </div>
         </div>
@@ -41,6 +43,7 @@
               id="Email"
               placeholder="eg. dev@gmail.com"
               required
+              name="email"
             />
           </div>
         </div>
@@ -52,6 +55,7 @@
               id="Phone"
               class="form-control"
               placeholder="+91 9999 99 9999"
+              name="phone"
               required
             />
           </div>
@@ -60,7 +64,7 @@
             <select
               class="form-select form-control"
               style="height: 34px; margin-top: 7px"
-              id="Gender"
+              id="Gender" name="gender"
               required
             >
               <option selected>Male</option>
@@ -77,6 +81,7 @@
               class="form-control"
               id="Password"
               placeholder="Password"
+              name="pass"
               required
             />
           </div>
