@@ -1,25 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const mysql = require('mysql')
-
-const connection = mysql.createConnection({
-  host: 'sql11.freemysqlhosting.net',
-  user: 'sql11436135',
-  password: 'gvTZJSPFK8',
-  database: 'sql11436135'
-})
+const connection = require('../sqlConnector')
 
 router.get('/', (req, res) => {
   res.render('./pages/home')
-})
-
-router.get('/login', (req, res) => {
-  res.render('./pages/login')
-})
-
-router.get('/register', (req, res) => {
-  res.render('./pages/register')
 })
 
 router.get('/appointment', (req, res) => {

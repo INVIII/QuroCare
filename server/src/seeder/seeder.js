@@ -1,12 +1,5 @@
 const faker = require('faker')
-const mysql = require('mysql')
-
-const connection = mysql.createConnection({
-  host: 'sql11.freemysqlhosting.net',
-  user: 'sql11436135',
-  password: 'gvTZJSPFK8',
-  database: 'sql11436135'
-})
+const connection = require('../sqlConnector')
 
 function random (a, b) {
   return Math.floor(Math.random() * a) + b
