@@ -211,6 +211,8 @@ body.fixed-nav {
     #mainNav.fixed-top .sidenav-toggler>.nav-item {
         width  : 250px;
         padding: 0;
+        font-size: 24px;
+        font-weight: 600;
     }
 
     #mainNav.fixed-top .sidenav-toggler>.nav-item>.nav-link {
@@ -219,7 +221,7 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
-    background-color: #212529;
+    background-color: #ffffff;
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
