@@ -49,6 +49,8 @@ router.get('/dashboard', (req, res) => {
   res.render('./pages/dash')
 })
 
-router.get('/admin', (req, res) => [res.render('./pages/admin')])
+router.get('/admin', (req, res) => {
+res.render('./pages/admin')
+})
 
 module.exports = router
