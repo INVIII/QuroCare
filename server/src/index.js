@@ -4,6 +4,9 @@ const path = require('path')
 const mainRoutes = require('./routes/main.js')
 const doctorRoutes = require('./routes/doctorRoutes.js')
 const patientRoutes = require('./routes/patientRoute.js')
+const session = require('express-session')
+
+const sessionOptions = { secret: 'asecretkeyforsession', resave: false, saveUninitialized: false }
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '..', '..', 'web', 'views'))
@@ -12,6 +15,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'web', 'public')))
 app.use('/', express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(session(sessionOptions))
 
 app.use('/', mainRoutes)
 app.use('/doctors', doctorRoutes)

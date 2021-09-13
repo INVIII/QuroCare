@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const connection = require('../sqlConnector')
+const connection = require('../utils/sqlConnector')
 
 router.get('/login', (req, res) => {
   res.render('./pages/login')
