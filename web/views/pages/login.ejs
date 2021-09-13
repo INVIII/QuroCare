@@ -49,6 +49,19 @@
 
 <script>
   const form = document.querySelector(".reg");
+
+  window.addEventListener("load", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  })
+
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 1200) {
       form.classList.add("col-12");

@@ -13,14 +13,14 @@ router.post('/login', (req, res) => {
   const q = `SELECT * FROM doctor WHERE email = "${email}" `
   connection.query(q, (err, result) => {
     if (err) throw err
-    const doctor=result[0]
+    const doctor = result[0]
     if (result.length === 0) {
       console.log('User Not Found')
       res.redirect('/doctors/login')
     } else {
       password = result[0].password
       if (password === pass) {
-        res.render('./pages/doctorDashboard',{doctor})
+        res.render('./pages/doctorDashboard', { doctor })
       } else {
         console.log('Wrong Password')
         res.redirect('/doctors/login')
