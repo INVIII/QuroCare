@@ -3,15 +3,15 @@
     <!-- <body class="fixed-nav sticky-footer side-nav" id="page-top"> -->
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top side-nav" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top side-nav" id="mainNav">
 
         <img src="/images/toplogo.png" class="logo">
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
 
-            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion" style="margin-top: 80px;">
+            <ul class="navbar-nav navbar-sidenav bg-dark" id="exampleAccordion">
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <li class="nav-item mt-4" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link" href="/">
                         <i class="fa fa-fw fa-home"></i>
                         <span class="nav-link-text">Home</span>
@@ -110,10 +110,12 @@
                         <span class="nav-link-text">Link</span>
                     </a>
                 </li>
-            </ul>
-            <ul class="navbar-nav sidenav-toggler text-center">
-                <li class="nav-item">
-               Dr.&nbsp;<%= doctor.fname %>&nbsp;<%= doctor.lname %>
+            </ul>            
+            <ul class="navbar-nav sidenav-toggler bg-dark">
+                <li class="nav-item text-center" style="color: aliceblue;">
+                    Dr.&nbsp;<%= doctor.fname %>&nbsp;<%= doctor.lname %>
+                    <a class="nav-link">                        
+                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -121,7 +123,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-fw fa-envelope dark"></i>
+                        <i class="fa fa-fw fa-envelope"></i>
                         <span class="d-lg-none">Messages
                             <span class="badge badge-pill badge-primary">12 New</span>
                         </span>
@@ -158,7 +160,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-fw fa-bell dark"></i>
+                        <i class="fa fa-fw fa-bell"></i>
                         <span class="d-lg-none">Alerts
                             <span class="badge badge-pill badge-warning">6 New</span>
                         </span>
@@ -214,9 +216,9 @@
                         </div>
                     </form>
                 </li>
-                <li class="nav-item dark">
-                    <a class="nav-link dark" data-toggle="modal" data-target="#exampleModal">
-                      <i class="fa fa-fw fa-sign-out dark"></i><span class="dark">Logout</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                      <i class="fa fa-fw fa-sign-out"></i><span>Logout</span></a>
                   </li>
             </ul>
         </div>
