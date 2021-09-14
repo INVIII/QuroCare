@@ -1,6 +1,6 @@
 const faker = require('faker')
 const connection = require('../sqlConnector')
-const {nanoid} = require('nanoid')
+const { nanoid } = require('nanoid')
 
 function random (a, b) {
   return Math.floor(Math.random() * a) + b
@@ -12,11 +12,11 @@ const patData = []
 const docData = []
 
 for (let i = 0; i < 10; i++) {
-  patData.push([nanoid() ,faker.name.firstName(), faker.name.lastName(), faker.internet.email(), faker.phone.phoneNumber(), gender[random(3, 0)], faker.internet.password()])
+  patData.push([nanoid(), faker.name.firstName(), faker.name.lastName(), faker.internet.email(), faker.phone.phoneNumber(), gender[random(3, 0)], faker.internet.password()])
 }
 
 for (let i = 0; i < 10; i++) {
-  docData.push([nanoid() ,faker.name.firstName(), faker.name.lastName(), deps[random(6, 0)], faker.phone.phoneNumber(), faker.internet.password(), faker.internet.email(), random(500, 300)])
+  docData.push([nanoid(), faker.name.firstName(), faker.name.lastName(), deps[random(6, 0)], faker.phone.phoneNumber(), faker.internet.password(), faker.internet.email(), random(500, 300)])
 }
 
 connection.query('INSERT INTO patient (_id, fname, lname, email, phone, gender, password) VALUES ?', [patData], function (err, res) {

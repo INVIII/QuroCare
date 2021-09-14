@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(session(sessionOptions))
 
 app.use('/', mainRoutes)
-app.use('/doctors', doctorRoutes)
+app.use('/doctor', doctorRoutes)
 app.use('/patient', patientRoutes)
 
 app.listen(3000, () => {
