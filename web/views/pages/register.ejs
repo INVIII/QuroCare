@@ -9,7 +9,7 @@
     <div class="col-6 reg d-flex flex-column">
       <img src="/images/toplogo.png" alt="logo" class="logo" />
       <div class="login-title text-center">Register</div>
-      <form action="/register" method="POST">
+      <form action="/patient/register" method="POST">
         <div class="row">
           <div class="form-floating col-lg-6">
             <label for="fName">First Name</label>
@@ -67,9 +67,9 @@
               id="Gender" name="gender"
               required
             >
-              <option selected>Male</option>
-              <option value="1">Female</option>
-              <option value="2">Non-binary</option>
+              <option selected value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-binary</option>
             </select>
           </div>
         </div>

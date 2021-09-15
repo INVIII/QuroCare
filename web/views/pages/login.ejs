@@ -1,5 +1,17 @@
 <%- include('../partials/auth-head.ejs') %>
 
+<% if (error && error.length) { %>  
+  <div class="myAlert-bottom alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= error %> 
+  </div>
+<% } else if (warning && warning.length) { %>  
+  <div class="myAlert-bottom alert alert-warning">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= warning %> 
+  </div>
+<% } %>
+
 <button onclick="location.href='/' " class="btn1">
   <i class="fa fa-home"></i>
 </button>

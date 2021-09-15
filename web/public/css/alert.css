@@ -1,0 +1,15 @@
+.myAlert-top{
+    position: fixed;
+    top: 5px; 
+    left:37%;
+    width: 26%;
+    z-index: 10000000;
+}
+
+.myAlert-bottom{
+    position: fixed;
+    top: 5px;
+    left:37%;
+    width: 26%;
+    z-index: 10000000;
+}

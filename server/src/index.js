@@ -5,6 +5,7 @@ const mainRoutes = require('./routes/main.js')
 const doctorRoutes = require('./routes/doctorRoutes.js')
 const patientRoutes = require('./routes/patientRoute.js')
 const session = require('express-session')
+const flash = require('connect-flash')
 
 const sessionOptions = { secret: 'asecretkeyforsession', resave: false, saveUninitialized: false }
 
@@ -16,9 +17,10 @@ app.use('/', express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(session(sessionOptions))
+app.use(flash())
 
 app.use('/', mainRoutes)
-app.use('/doctors', doctorRoutes)
+app.use('/doctor', doctorRoutes)
 app.use('/patient', patientRoutes)
 
 app.listen(3000, () => {
