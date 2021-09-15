@@ -1,5 +1,17 @@
 <%- include('../partials/homeHead') %>
 
+<% if (error && error.length) { %>  
+  <div class="myAlert-bottom alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= error %> 
+  </div>
+<% } else if (success && success.length) { %>  
+  <div class="myAlert-top alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= success %> 
+  </div>
+<% } %> 
+
   <!-- contents of body -->
   <header id="menu-jk">
     <div id="nav-head" class="header-nav">
@@ -367,5 +379,6 @@
         <a><i class="fab fa-facebook-f"></i></a>
       </span>
     </div>
-  </div>
+  </div>  
+
   <%- include('../partials/foot') %>

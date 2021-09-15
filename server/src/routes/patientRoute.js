@@ -9,8 +9,10 @@ const router = express.Router()
 function protectLogin (req, res, next) {
   if (!session.userID) {
     console.log('Login to continue')
+    req.flash('warning', 'Login to continue!')
     return res.redirect('/patient/login')
   } else if (session.userType === 'doctor') {
+    req.flash('warning', 'Already logged in  as a doctor!')
     res.redirect('/doctor/dashboard')
   } else {
     next()
@@ -20,11 +22,12 @@ function protectLogin (req, res, next) {
 // login logic
 router.get('/login', (req, res) => {
   if (session.userType === 'doctor') {
+    req.flash('warning', 'Already logged in as a doctor!')
     res.redirect('/doctor/dashboard')
   } else if (session.userID) {
     res.redirect('/patient/dashboard')
   } else {
-    res.render('./pages/login')
+    res.render('./pages/login', { error: req.flash('error'), warning: req.flash('warning') })
   }
 })
 
@@ -33,9 +36,13 @@ router.post('/login', async (req, res) => {
   let password = ''
   const q = `SELECT password FROM patient WHERE email = "${email}" `
   connection.query(q, async (err, result) => {
-    if (err) throw err
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
     if (result.length === 0) {
-      console.log('User Not Found')
+      // console.log('User Not Found')
+      req.flash('error', 'User Not Found!')
       res.redirect('/patient/login')
     } else {
       password = result[0].password
@@ -45,7 +52,8 @@ router.post('/login', async (req, res) => {
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
       } else {
-        console.log('Wrong Password')
+        req.flash('error', 'Wrong Password!')
+        // console.log('Wrong Password')
         res.redirect('/patient/login')
       }
     }
@@ -56,6 +64,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   session.userID = null
   session.userType = null
+  req.flash('success', 'Logged Out!')
   res.redirect('/')
 })
 
@@ -63,9 +72,12 @@ router.get('/dashboard', protectLogin, (req, res) => {
   const user = session.userID
   const q = `SELECT * FROM patient WHERE email = "${user}"`
   connection.query(q, (err, result) => {
-    if (err) throw err
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
     const patient = result[0]
-    res.render('./pages/patientDash', { patient })
+    res.render('./pages/patientDash', { patient, warning: req.flash('warning') })
   })
 })
 
@@ -75,6 +87,7 @@ router.get('/register', (req, res) => {
   if (!session.userID) {
     res.render('./pages/register')
   } else if (session.userType === 'doctor') {
+    req.flash('warning', 'Already Logged in as a doctor!')
     res.redirect('/doctor/dashboard')
   } else {
     res.redirect('/patient/dashboard')
@@ -89,7 +102,10 @@ router.post('/register', async (req, res) => {
   const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}')`
 
   connection.query(q, (err, result) => {
-    if (err) throw err
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
     session.userID = email
     session.userType = 'patient'
     res.redirect('/patient/dashboard')
@@ -101,7 +117,10 @@ router.get('/appointment', protectLogin, (req, res) => {
   const departments = [{ name: 'Cardiology', doctors: [] }, { name: 'Orthopaedic', doctors: [] }, { name: 'Neurologist', doctors: [] }, { name: 'Pharmacology', doctors: [] }, { name: 'Physiology', doctors: [] }, { name: 'Psychiatry', doctors: [] }]
 
   connection.query(q, (err, result) => {
-    if (err) throw err
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
     for (const i of result) {
       for (let j = 0; j < 6; j++) {
         if (i.department === departments[j].name) {
@@ -113,6 +132,10 @@ router.get('/appointment', protectLogin, (req, res) => {
     }
     res.render('./pages/appointment', { departments })
   })
+})
+
+router.get('*', (req, res) => {
+  res.sendStatus(404)
 })
 
 module.exports = router

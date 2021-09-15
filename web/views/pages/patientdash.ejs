@@ -1,5 +1,12 @@
 <%- include('../partials/dash-head.ejs') %>
 
+<% if (warning && warning.length) { %>  
+    <div class="myAlert-bottom alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= warning %> 
+    </div>
+<% } %>
+
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top side-nav bg-dark" id="mainNav">
         <img src="/images/toplogo.png" class="logo" />
