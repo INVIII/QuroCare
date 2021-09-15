@@ -1,5 +1,9 @@
 <%- include('../partials/auth-head.ejs') %>
 
+
+
+<!-- l4Zd0QlzivACzxK -->
+<!-- Zack.Jones@gmail.com -->
 <button onclick="location.href='/' " class="btn1">
   <i class="fa fa-home"></i>
 </button>
@@ -64,7 +68,8 @@
             <select
               class="form-select form-control"
               style="height: 34px; margin-top: 7px"
-              id="Gender" name="gender"
+              id="Gender"
+              name="gender"
               required
             >
               <option selected>Male</option>
@@ -99,7 +104,7 @@
         <div class="mt-4">
           <button class="btn btn-primary" type="submit">Register</button>
           <div class="des mt-4 text-center">
-            Already Registered?
+            <span class="new-user">Already Registered?</span>
             <a href="/patient/login">Login</a>
           </div>
         </div>
@@ -110,6 +115,16 @@
 </div>
 
 <script>
+  const darkl = document.querySelector(".form-cont");
+  darkMode = localStorage.getItem("darkMode");
+  const new_user = document.querySelector(".new-user");
+  if (darkMode === "enabled") {
+    darkl.classList.add("dark");
+    new_user.classList.add("dark");
+  } else {
+    darkl.classList.remove("dark");
+    new_user.classList.remove("dark");
+  }
   const form = document.querySelector(".reg");
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 1200) {

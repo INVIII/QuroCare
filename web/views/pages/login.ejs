@@ -39,7 +39,7 @@
       </form>
 
       <div class="des mt-4 text-center">
-        A new user?
+        <span class="new-user">A new user?</span>
         <a href="/patient/register">Register</a>
       </div>
     </div>
@@ -48,6 +48,17 @@
 </div>
 
 <script>
+  const darkl = document.querySelector(".form-cont");
+  const new_user = document.querySelector(".new-user");
+  darkMode = localStorage.getItem("darkMode");
+
+  if (darkMode === "enabled") {
+    darkl.classList.add("dark");
+    new_user.classList.add("dark");
+  } else {
+    darkl.classList.remove("dark");
+    new_user.classList.remove("dark");
+  }
   const form = document.querySelector(".reg");
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 1200) {

@@ -26,10 +26,15 @@ body {
   width: 80%;
   z-index: 20;
   background-color: rgb(248, 248, 249);
-
 }
-
-.appbook{
+.form-cont.dark {
+  background-color: black;
+  color: white;
+}
+.new-user.dark {
+  color: white;
+}
+.appbook {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,7 +45,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
-    -webkit-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 
@@ -54,7 +59,6 @@ body {
   width: 100%;
   color: white;
 }
-
 
 .login-title {
   margin-top: 75px;
@@ -88,7 +92,8 @@ form {
 }
 
 @media only screen and (max-width: 1200px) {
-  body, .appbook {
+  body,
+  .appbook {
     background-image: none;
     background-color: #4e74e9;
   }
@@ -121,17 +126,15 @@ form {
 /* Appointment bookapp CSS starts here  */
 
 .form-cont {
-
   box-shadow: -5px 5px 5px 2px rgba(11, 12, 20, 0.2);
   border-radius: 0px;
-  color:#434344
-
+  color: #434344;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
-.logo{
+.logo {
   box-shadow: 3px 3px 2px 2px rgba(39, 39, 39, 0.349);
 }
