@@ -1,9 +1,12 @@
 <%- include('../partials/dash-head.ejs') %>
 
 <% if (warning && warning.length) { %>
-    <div class="myAlert-bottom alert alert-warning">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <%= warning %> 
+    <div class="myAlert-bottom alert alert-warning d-flex flex-row justify-content-between align-items-center">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <%= warning %> 
+        </div>
+      <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close">&times;</a>
     </div>
 <% } %>
     
