@@ -99,7 +99,7 @@ router.post('/register', async (req, res) => {
   const hash = await bcrypt.hash(pass, 12)
   const id = nanoid()
 
-  const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}')`
+  const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
 
   connection.query(q, (err, result) => {
     if (err) {
