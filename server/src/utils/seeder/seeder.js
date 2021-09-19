@@ -11,7 +11,7 @@ const gender = ['Male', 'Female', 'Non-Binary']
 const patData = []
 const docData = []
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 5; i++) {
   patData.push([nanoid(), faker.name.firstName(), faker.name.lastName(), faker.internet.email(), faker.phone.phoneNumber(), gender[random(3, 0)], faker.internet.password(), 0])
 }
 

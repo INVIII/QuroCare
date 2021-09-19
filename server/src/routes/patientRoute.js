@@ -19,6 +19,20 @@ function protectLogin (req, res, next) {
   }
 }
 
+function already (email) {
+  const q0 = `SELECT * FROM patient WHERE email="${email}";`
+  connection.query(q0, (err, result) => {
+    if (err) {
+      throw err
+    }
+    if (result.length === 0) {
+      return 'not-ok'
+    } else {
+      return 'ok'
+    }
+  })
+}
+
 // login logic
 router.get('/login', (req, res) => {
   if (session.userType === 'doctor') {
@@ -85,7 +99,7 @@ router.get('/dashboard', protectLogin, (req, res) => {
 
 router.get('/register', (req, res) => {
   if (!session.userID) {
-    res.render('./pages/register')
+    res.render('./pages/register', { warning: req.flash('warning') })
   } else if (session.userType === 'doctor') {
     req.flash('warning', 'Already Logged in as a doctor!')
     res.redirect('/doctor/dashboard')
@@ -94,22 +108,29 @@ router.get('/register', (req, res) => {
   }
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res, next) => {
   const { fname, lname, email, phone, gender, pass } = req.body
-  const hash = await bcrypt.hash(pass, 12)
-  const id = nanoid()
 
-  const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
+  if (already(email) !== 'ok') {
+    console.log('io')
+    req.flash('warning', 'This email is already registered!')
+    res.redirect('/patient/register')
+  } else {
+    const hash = await bcrypt.hash(pass, 12)
+    const id = nanoid()
 
-  connection.query(q, (err, result) => {
-    if (err) {
-      req.flash('error', 'An error has occured! Please contact admin')
-      res.redirect('/')
-    }
-    session.userID = email
-    session.userType = 'patient'
-    res.redirect('/patient/dashboard')
-  })
+    const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
+
+    connection.query(q, (err, result) => {
+      if (err) {
+        req.flash('error', 'An error has occured! Please contact admin')
+        res.redirect('/')
+      }
+      session.userID = email
+      session.userType = 'patient'
+      res.redirect('/patient/dashboard')
+    })
+  }
 })
 
 router.get('/appointment', protectLogin, (req, res) => {
