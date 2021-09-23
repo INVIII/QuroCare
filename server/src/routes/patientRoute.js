@@ -26,9 +26,9 @@ function already (email) {
       throw err
     }
     if (result.length === 0) {
-      return 'not-ok'
+      return 0
     } else {
-      return 'ok'
+      return 1
     }
   })
 }
@@ -111,8 +111,7 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res, next) => {
   const { fname, lname, email, phone, gender, pass } = req.body
 
-  if (already(email) !== 'ok') {
-    console.log('io')
+  if (already(email) === 1) {
     req.flash('warning', 'This email is already registered!')
     res.redirect('/patient/register')
   } else {
@@ -145,7 +144,8 @@ router.get('/appointment', protectLogin, (req, res) => {
     for (const i of result) {
       for (let j = 0; j < 6; j++) {
         if (i.department === departments[j].name) {
-          const temp = { name: i.fname + ' ' + i.lname, fees: i.fees }
+          // add id of doctor here
+          const temp = { name: i.fname + ' ' + i.lname, id: i._id , fees: i.fees }
           departments[j].doctors.push(temp)
           break
         }
@@ -154,5 +154,35 @@ router.get('/appointment', protectLogin, (req, res) => {
     res.render('./pages/appointment', { departments })
   })
 })
+
+// select patid through email in session
+// get doctor id from departments in the post
+router.post('/appointment', (req,res) => {
+  const patEmail = session.userID
+  const { OPD, doctor, date, time, address, age, phone, details } = req.body
+  const docID = doctor.split(' ')[4]
+
+  const q = `SELECT * FROM patient WHERE email = "${patEmail}"`
+  const patID = ''
+  connection.query( q, (err, result) => {
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
+    console.log(result[0]._id)
+    const patID = result[0]._id
+    //to use all inputs from the post using chnges in schema of appointment table
+    const q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s) VALUES (${nanoid()}, ${patID}, ${docID}, ${date}, 0, 0)`
+    connection.query(q0, (error,res2) => {
+      if (error) {
+        req.flash('error', 'An error has occured! Please contact admin')
+        res.redirect('/')
+      }
+      console.log(res2)
+    })
+  })
+
+})
+
 
 module.exports = router
