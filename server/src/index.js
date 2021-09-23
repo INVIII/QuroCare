@@ -24,7 +24,7 @@ app.use('/doctor', doctorRoutes)
 app.use('/patient', patientRoutes)
 
 app.get('*', (req, res) => {
-  res.send('404 Not Found')
+  res.render('./pages/404')
 })
 
 app.listen(3000, () => {
