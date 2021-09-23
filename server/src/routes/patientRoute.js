@@ -41,7 +41,7 @@ router.get('/login', (req, res) => {
   } else if (session.userID) {
     res.redirect('/patient/dashboard')
   } else {
-    res.render('./pages/login', { error: req.flash('error'), warning: req.flash('warning') })
+    res.render('./pages/login', { error: req.flash('error'), warning: req.flash('warning'), userType: 'patient' })
   }
 })
 
