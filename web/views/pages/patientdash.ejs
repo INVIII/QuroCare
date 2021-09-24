@@ -9,6 +9,33 @@
   <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close">&times;</a>
 </div>
 
+<% } else if (success && success.length) { %>
+<div
+  class="
+    myAlert-bottom
+    alert alert-success
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Success:"
+    >
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+    <%= success %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
+</div>
 <% } %> 
 
     <!-- Navigation-->
