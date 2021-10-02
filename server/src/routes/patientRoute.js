@@ -53,11 +53,6 @@ router.post('/login', async (req, res) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
-    }
-    if (result.length === 0) {
-      // console.log('User Not Found')
-      req.flash('error', 'User Not Found!')
-      res.redirect('/patient/login')
     } else {
       password = result[0].password
       const isCorrect = await bcrypt.compare(pass, password)
