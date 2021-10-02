@@ -53,11 +53,6 @@ router.post('/login', async (req, res) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
-    }
-    if (result.length === 0) {
-      // console.log('User Not Found')
-      req.flash('error', 'User Not Found!')
-      res.redirect('/patient/login')
     } else {
       password = result[0].password
       const isCorrect = await bcrypt.compare(pass, password)
@@ -91,7 +86,7 @@ router.get('/dashboard', protectLogin, (req, res) => {
       res.redirect('/')
     }
     const patient = result[0]
-    res.render('./pages/patientDash', { patient, warning: req.flash('warning') })
+    res.render('./pages/patientDash', { patient, warning: req.flash('warning'), success: req.flash('success') })
   })
 })
 
@@ -145,7 +140,7 @@ router.get('/appointment', protectLogin, (req, res) => {
       for (let j = 0; j < 6; j++) {
         if (i.department === departments[j].name) {
           // add id of doctor here
-          const temp = { name: i.fname + ' ' + i.lname, id: i._id , fees: i.fees }
+          const temp = { name: i.fname + ' ' + i.lname, id: i._id, fees: i.fees }
           departments[j].doctors.push(temp)
           break
         }
@@ -157,32 +152,35 @@ router.get('/appointment', protectLogin, (req, res) => {
 
 // select patid through email in session
 // get doctor id from departments in the post
-router.post('/appointment', (req,res) => {
+router.post('/appointment', (req, res) => {
   const patEmail = session.userID
   const { OPD, doctor, date, time, address, age, phone, details } = req.body
   const docID = doctor.split(' ')[4]
 
   const q = `SELECT * FROM patient WHERE email = "${patEmail}"`
-  const patID = ''
-  connection.query( q, (err, result) => {
+  let patID
+  let q0 = ''
+  connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     }
     console.log(result[0]._id)
-    const patID = result[0]._id
-    //to use all inputs from the post using chnges in schema of appointment table
-    const q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s) VALUES (${nanoid()}, ${patID}, ${docID}, ${date}, 0, 0)`
-    connection.query(q0, (error,res2) => {
+    patID = result[0]._id
+    // to use all inputs from the post using chnges in schema of appointment table
+    q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s) VALUES ("${nanoid()}", "${patID}", "${docID}", "${date}", 0, 0)`
+
+    connection.query(q0, (error, result) => {
       if (error) {
-        req.flash('error', 'An error has occured! Please contact admin')
+        const newLocal = 'An error has occured! Please contact admin'
+        req.flash('error', newLocal)
+        console.log(error)
         res.redirect('/')
       }
-      console.log(res2)
+      req.flash('success', 'Appointment have been added')
+      res.redirect('/patient/dashboard')
     })
   })
-
 })
-
 
 module.exports = router
