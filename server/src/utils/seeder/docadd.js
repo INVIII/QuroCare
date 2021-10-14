@@ -7,3 +7,5 @@ connection.query('INSERT INTO doctor (_id, fname, lname, department, phone, pass
   if (err) throw err
   console.log(res)
 })
+
+connection.end()
