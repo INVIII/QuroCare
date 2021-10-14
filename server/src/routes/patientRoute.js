@@ -150,16 +150,48 @@ router.get('/appointment', protectLogin, (req, res) => {
   })
 })
 
-// select patid through email in session
-// get doctor id from departments in the post
+const getT = (dat) => {
+  switch (dat) {
+    case 1:
+      return '9:30'
+    case 2:
+      return '12:30'
+    case 3:
+      return '3:30'
+    case 4:
+      return '5:00'
+    default:
+      return '12:30'
+  }
+}
+
+const getA = (ag) => {
+  switch (ag) {
+    case 1:
+      return 'Infant'
+    case 2:
+      return 'Child'
+    case 3:
+      return 'Adult'
+    case 4:
+      return 'Senior Citizen'
+    default:
+      return 'Adult'
+  }
+}
+
 router.post('/appointment', (req, res) => {
   const patEmail = session.userID
-  const { OPD, doctor, date, time, address, age, phone, details } = req.body
+  const { OPD, doctor, date, time, address, age, phone, Details } = req.body
   const docID = doctor.split(' ')[4]
 
   const q = `SELECT * FROM patient WHERE email = "${patEmail}"`
   let patID
   let q0 = ''
+
+  const tim = getT(time)
+  const ag = getA(age)
+
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
@@ -168,7 +200,7 @@ router.post('/appointment', (req, res) => {
     console.log(result[0]._id)
     patID = result[0]._id
     // to use all inputs from the post using chnges in schema of appointment table
-    q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s) VALUES ("${nanoid()}", "${patID}", "${docID}", "${date}", 0, 0)`
+    q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s, details, time, address, age, phone) VALUES ("${nanoid()}", "${patID}", "${docID}", "${date}", 0, 0, "${Details}", "${tim}", "${address}", "${ag}","${phone}")`
 
     connection.query(q0, (error, result) => {
       if (error) {
