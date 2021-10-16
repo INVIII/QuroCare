@@ -26,9 +26,9 @@ function already (email) {
       throw err
     }
     if (result.length === 0) {
-      return 'not-ok'
+      return 0
     } else {
-      return 'ok'
+      return 1
     }
   })
 }
@@ -48,21 +48,16 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, pass } = req.body
   let password = ''
-  const q = `SELECT password FROM patient WHERE email = "${email}" `
+  const q = `SELECT password, _id FROM patient WHERE email = "${email}" `
   connection.query(q, async (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
-    }
-    if (result.length === 0) {
-      // console.log('User Not Found')
-      req.flash('error', 'User Not Found!')
-      res.redirect('/patient/login')
-    } else {
+    } else {      
       password = result[0].password
       const isCorrect = await bcrypt.compare(pass, password)
       if (isCorrect) {
-        session.userID = email
+        session.userID = result[0]._id
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
       } else {
@@ -84,14 +79,16 @@ router.post('/logout', (req, res) => {
 
 router.get('/dashboard', protectLogin, (req, res) => {
   const user = session.userID
-  const q = `SELECT * FROM patient WHERE email = "${user}"`
+  let q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment, patient WHERE patient._id = "${user}" AND appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id`
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
+      // console.log(err)
     }
-    const patient = result[0]
-    res.render('./pages/patientDash', { patient, warning: req.flash('warning') })
+    // console.log(result);
+    const patient = result
+    res.render('./pages/patientDash', { patient, warning: req.flash('warning'), success: req.flash('success') })
   })
 })
 
@@ -111,8 +108,7 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res, next) => {
   const { fname, lname, email, phone, gender, pass } = req.body
 
-  if (already(email) !== 'ok') {
-    console.log('io')
+  if (already(email) === 1) {
     req.flash('warning', 'This email is already registered!')
     res.redirect('/patient/register')
   } else {
@@ -145,13 +141,79 @@ router.get('/appointment', protectLogin, (req, res) => {
     for (const i of result) {
       for (let j = 0; j < 6; j++) {
         if (i.department === departments[j].name) {
-          const temp = { name: i.fname + ' ' + i.lname, fees: i.fees }
+          // add id of doctor here
+          const temp = { name: i.fname + ' ' + i.lname, id: i._id, fees: i.fees }
           departments[j].doctors.push(temp)
           break
         }
       }
     }
     res.render('./pages/appointment', { departments })
+  })
+})
+
+const getT = (dat) => {
+  switch (dat) {
+    case 1:
+      return '9:30'
+    case 2:
+      return '12:30'
+    case 3:
+      return '3:30'
+    case 4:
+      return '5:00'
+    default:
+      return '12:30'
+  }
+}
+
+const getA = (ag) => {
+  switch (ag) {
+    case 1:
+      return 'Infant'
+    case 2:
+      return 'Child'
+    case 3:
+      return 'Adult'
+    case 4:
+      return 'Senior Citizen'
+    default:
+      return 'Adult'
+  }
+}
+
+router.post('/appointment', (req, res) => {
+  const patEmail = session.userID
+  const { OPD, doctor, date, time, address, age, phone, Details } = req.body
+  const docID = doctor.split(' ')[4]
+
+  const q = `SELECT * FROM patient WHERE _id = "${patEmail}"`
+  let patID
+  let q0 = ''
+
+  const tim = getT(time)
+  const ag = getA(age)
+
+  connection.query(q, (err, result) => {
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+    }
+    console.log(result[0]._id)
+    patID = result[0]._id
+    // to use all inputs from the post using chnges in schema of appointment table
+    q0 = `INSERT INTO appointment (_id, pat_id, doc_id, Date, pat_s, doc_s, details, time, address, age, phone) VALUES ("${nanoid()}", "${patID}", "${docID}", "${date}", 0, 0, "${Details}", "${tim}", "${address}", "${ag}","${phone}")`
+
+    connection.query(q0, (error, result) => {
+      if (error) {
+        const newLocal = 'An error has occured! Please contact admin'
+        req.flash('error', newLocal)
+        console.log(error)
+        res.redirect('/')
+      }
+      req.flash('success', 'Appointment have been added')
+      res.redirect('/patient/dashboard')
+    })
   })
 })
 
