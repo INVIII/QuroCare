@@ -1,10 +1,11 @@
 const mysql = require('mysql')
+const { host, user, password, database } = require('./config');
 
 const connection = mysql.createConnection({
-  host: 'remotemysql.com',
-  user: '787yC9r1m0',
-  password: 'uLk5oGqfuY',
-  database: '787yC9r1m0'
+  host: host,
+  user: user,
+  password: password,
+  database: database
 })
 
 module.exports = connection

@@ -48,16 +48,16 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, pass } = req.body
   let password = ''
-  const q = `SELECT password FROM patient WHERE email = "${email}" `
+  const q = `SELECT password, _id FROM patient WHERE email = "${email}" `
   connection.query(q, async (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
-    } else {
+    } else {      
       password = result[0].password
       const isCorrect = await bcrypt.compare(pass, password)
       if (isCorrect) {
-        session.userID = email
+        session.userID = result[0]._id
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
       } else {
@@ -79,13 +79,15 @@ router.post('/logout', (req, res) => {
 
 router.get('/dashboard', protectLogin, (req, res) => {
   const user = session.userID
-  const q = `SELECT * FROM patient WHERE email = "${user}"`
+  let q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment, patient WHERE patient._id = "${user}" AND appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id`
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
+      // console.log(err)
     }
-    const patient = result[0]
+    // console.log(result);
+    const patient = result
     res.render('./pages/patientDash', { patient, warning: req.flash('warning'), success: req.flash('success') })
   })
 })
@@ -185,7 +187,7 @@ router.post('/appointment', (req, res) => {
   const { OPD, doctor, date, time, address, age, phone, Details } = req.body
   const docID = doctor.split(' ')[4]
 
-  const q = `SELECT * FROM patient WHERE email = "${patEmail}"`
+  const q = `SELECT * FROM patient WHERE _id = "${patEmail}"`
   let patID
   let q0 = ''
 
