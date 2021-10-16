@@ -72,7 +72,7 @@
 
             <ul class="navbar-nav sidenav-toggler bg-dark">
                 <li class="nav-item text-center" style="color: aliceblue;">
-                    <%= patient.fname %>&nbsp;<%= patient.lname %>
+                    <%= patient[0].p_fname %>&nbsp;<%= patient[0].p_lname %>
                     <a class="nav-link">                        
                     </a>
                 </li>
@@ -257,56 +257,24 @@
                     </div>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr>                                
                                 <th>Sr No.</th>
                                 <th>Department</th>
                                 <th>Doctor</th>
-                                <th>Date</th>
-                                <th>Disease</th>
-                                <th>Prescription</th>
+                                <th>Date</th>                                
                             </tr>
                         </thead>
                         <tbody>
+                            <% let index = 0 %> 
+                            <% for (let i of patient) {%> 
                             <tr>
-                                <td>1.</td>
-                                <td>Psychatry</td>
-                                <td>Dr. Amit Pathak</td>
-                                <td>22/11/2021</td>
-                                <td>PTSD</td>
-                                <td>Don't panic until you meet your assigned Doctor</td>
+                                <td><%- index+=1 %> </td>
+                                <td><%- i.department %> </td>
+                                <td><%- (i.fname + " " + i.lname) %></td>
+                                <% const temp = String(i.Date).substring(0, 15) %> 
+                                <td><%- temp %></td>  
                             </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Psychatry</td>
-                                <td>Dr. Amit Pathak</td>
-                                <td>22/11/2021</td>
-                                <td>PTSD</td>
-                                <td>Don't panic until you meet your assigned Doctor</td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Psychatry</td>
-                                <td>Dr. Amit Pathak</td>
-                                <td>22/11/2021</td>
-                                <td>PTSD</td>
-                                <td>Don't panic until you meet your assigned Doctor</td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Psychatry</td>
-                                <td>Dr. Amit Pathak</td>
-                                <td>22/11/2021</td>
-                                <td>PTSD</td>
-                                <td>Don't panic until you meet your assigned Doctor</td>
-                            </tr>
-                            <tr>
-                                <td>5.</td>
-                                <td>Psychatry</td>
-                                <td>Dr. Amit Pathak</td>
-                                <td>22/11/2021</td>
-                                <td>PTSD</td>
-                                <td>Don't panic until you meet your assigned Doctor</td>
-                            </tr>
+                            <% } %>                             
                         </tbody>
                     </table>
                 </div>
