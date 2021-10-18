@@ -19,20 +19,6 @@ function protectLogin (req, res, next) {
   }
 }
 
-function already (email) {
-  const q0 = `SELECT * FROM patient WHERE email="${email}";`
-  connection.query(q0, (err, result) => {
-    if (err) {
-      throw err
-    }
-    if (result.length === 0) {
-      return 0
-    } else {
-      return 1
-    }
-  })
-}
-
 // login logic
 router.get('/login', (req, res) => {
   if (session.userType === 'doctor') {
@@ -79,7 +65,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/dashboard', protectLogin, (req, res) => {
   const user = session.userID
-  let q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment, patient WHERE patient._id = "${user}" AND appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id`
+  let q = `SELECT doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment WHERE appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id`
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
@@ -88,7 +74,18 @@ router.get('/dashboard', protectLogin, (req, res) => {
     }
     // console.log(result);
     const patient = result
-    res.render('./pages/patientDash', { patient, warning: req.flash('warning'), success: req.flash('success') })
+    q = `select fname, lname from patient where _id="${user}"`
+    connection.query(q, (err1, result1) => {
+      if (err1) {
+        req.flash('error', 'An error has occured! Please contact admin')
+        res.redirect('/')
+        // console.log(err1)
+      }
+      const name = result1;
+      res.render('./pages/patientDash', { name, patient, warning: req.flash('warning'), success: req.flash('success') })
+      // console.log(name)
+    })
+    
   })
 })
 
@@ -108,25 +105,34 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res, next) => {
   const { fname, lname, email, phone, gender, pass } = req.body
 
-  if (already(email) === 1) {
-    req.flash('warning', 'This email is already registered!')
-    res.redirect('/patient/register')
-  } else {
-    const hash = await bcrypt.hash(pass, 12)
-    const id = nanoid()
+  const q0 = `SELECT * FROM patient WHERE email="${email}";`
+  connection.query(q0, async (err, result1) => {
+    if (err) {
+      throw err
+    }
 
-    const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
-
-    connection.query(q, (err, result) => {
-      if (err) {
-        req.flash('error', 'An error has occured! Please contact admin')
-        res.redirect('/')
-      }
-      session.userID = result[0]._id
-      session.userType = 'patient'
-      res.redirect('/patient/dashboard')
-    })
-  }
+    if (result1.length > 0) {      
+      req.flash('warning', 'This email is already registered!')
+      res.redirect('/patient/register')
+    } else {
+      const hash = await bcrypt.hash(pass, 12)
+      const id = nanoid()
+  
+      const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
+  
+      connection.query(q, (err1, result) => {
+        if (err1) {
+          req.flash('error', 'An error has occured! Please contact admin')
+          res.redirect('/')
+        }      
+  
+        session.userID = id
+        session.userType = 'patient'
+        res.redirect('/patient/dashboard')
+      })
+    }
+    
+  })  
 })
 
 router.get('/appointment', protectLogin, (req, res) => {

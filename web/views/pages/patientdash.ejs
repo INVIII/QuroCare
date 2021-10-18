@@ -72,7 +72,7 @@
 
             <ul class="navbar-nav sidenav-toggler bg-dark">
                 <li class="nav-item text-center" style="color: aliceblue;">
-                    <%= patient[0].p_fname %>&nbsp;<%= patient[0].p_lname %>
+                    <%= name[0].fname %>&nbsp;<%= name[0].lname %>
                     <a class="nav-link">                        
                     </a>
                 </li>
@@ -265,6 +265,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% if (patient && patient.length !== 0)  { %> 
                             <% let index = 0 %> 
                             <% for (let i of patient) {%> 
                             <tr>
@@ -274,7 +275,8 @@
                                 <% const temp = String(i.Date).substring(0, 15) %> 
                                 <td><%- temp %></td>  
                             </tr>
-                            <% } %>                             
+                            <% } %>
+                            <% } %>                              
                         </tbody>
                     </table>
                 </div>

@@ -91,9 +91,9 @@ router.get('/dashboard', protectLogin, (req, res) => {
   })
 })
 
-router.get('/prescribe/:patId', protectLogin, (req, res) => {
-  const { patId } = req.params
-  const q = `SELECT fname, lname FROM patient where _id = "${ patId }"`
+router.get('/prescribe/:appId', protectLogin, (req, res) => {
+  const { appId } = req.params
+  const q = `SELECT patient.fname, patient.lname FROM appointment, patient where appointment._id = "${ appId }" AND patient._id = appointment.pat_id`
 
   // console.log(patId)
 
@@ -105,7 +105,7 @@ router.get('/prescribe/:patId', protectLogin, (req, res) => {
     }
     // console.log(result)
     const p_name = result[0].fname + " " + result[0].lname
-    res.render('./pages/pres', {p_name, patId, warning: req.flash('warning') })
+    res.render('./pages/pres', {p_name, appId, warning: req.flash('warning') })
   })
   
 })
