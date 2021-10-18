@@ -78,4 +78,28 @@ router.get('/dashboard', protectLogin, (req, res) => {
   })
 })
 
+router.get('/prescribe/:patId', protectLogin, (req, res) => {
+  const { patId } = req.params
+  const q = `SELECT fname, lname FROM patient where _id = "${ patId }"`
+
+  // console.log(patId)
+
+  connection.query(q, (err, result) => {
+    if (err) {
+      req.flash('error', 'An error has occured! Please contact admin')
+      res.redirect('/')
+      console.log(err)
+    }
+    // console.log(result)
+    const p_name = result[0].fname + " " + result[0].lname
+    res.render('./pages/pres', {p_name, patId, warning: req.flash('warning') })
+  })
+  
+})
+
+router.post('/prescribe', (req, res) => {
+  const { pat_id, disease, allergy, feedback } = req.body
+  res.send(req.body)
+})
+
 module.exports = router

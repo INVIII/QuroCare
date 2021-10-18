@@ -1,0 +1,139 @@
+<%- include('../partials/auth-head.ejs') %> 
+<% if (warning && warning.length) { %>
+<div
+  class="
+    myAlert-bottom
+    alert alert-warning
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Warning:"
+    >
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <%= warning %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
+</div>
+<% } %>
+
+<button onclick="location.href='/' " class="btn1">
+  <i class="fa fa-home"></i>
+</button>
+
+<div class="main d-flex flex-column justify-content-center align-items-center">
+    <div class="form-cont row">
+    <div class="reg col-6 d-flex flex-column">
+      <img src="/images/toplogo.png" alt="logo" class="logo" />
+      <div class="login-title text-center">Prescribe</div>
+
+      <form class="row" action="/doctor/prescribe" method="POST">
+        
+        <div class="col-12">
+            <label class="form-label" for="patient" name="patient">Patient</label>
+            <input
+              class="form-control"
+              id="patient"
+              name="patient"
+              type="text"
+              value="<%= p_name %> "
+              required
+              disabled
+            />
+          </div>
+
+          <input
+              class="form-control hide"
+              id="pat_id"
+              name="pat_id"
+              type="text"
+              value="<%= patId %> "
+              required
+            />
+        
+        <div class="col-12">
+          <label class="form-label" for="disease" name="disease">Disease</label>
+          <input
+            class="form-control"
+            id="disease"
+            name="disease"
+            type="text"
+            placeholder="Enter the diagnosed disease"
+            required
+          />
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="allergy" name="allergy">Allergies</label>
+          <input
+            class="form-control"
+            id="allergy"
+            name="allergy"
+            type="text"
+            placeholder="Enter the diagnosed allergies"
+            required
+          />
+        </div>
+        <div class="col-12">
+            <label class="form-label" for="feedback" name="feedback">Feedback</label>
+            <input
+              class="form-control"
+              id="feedback"
+              name="feedback"
+              type="text"
+              placeholder="Enter additional feedback"
+              required
+            />
+        </div>        
+        <div class="col-12 mt-4">
+          <button class="btn btn-primary">Prescribe</button>
+        </div>
+      </form>      
+      <div class="des mt-4 text-center">        
+        <a href="/doctor/dashboard">Back to dashboard</a>
+      </div>
+      
+    </div>
+    <div class="col-6 image-part"></div>
+</div>
+
+
+<script>
+  const form = document.querySelector(".reg");
+
+  window.addEventListener("load", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  });
+</script>
+
+<%- include('../partials/foot.ejs') %>
