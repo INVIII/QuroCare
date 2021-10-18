@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
-    } else {      
+    } else {
       password = result[0].password
       const isCorrect = await bcrypt.compare(pass, password)
       if (isCorrect) {
@@ -122,7 +122,7 @@ router.post('/register', async (req, res, next) => {
         req.flash('error', 'An error has occured! Please contact admin')
         res.redirect('/')
       }
-      session.userID = email
+      session.userID = result[0]._id
       session.userType = 'patient'
       res.redirect('/patient/dashboard')
     })

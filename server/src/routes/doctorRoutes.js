@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
       password = result[0].password
       // const isCorrect = await bcrypt.compare(pass, password)
       if (pass === password) {
-        session.userID = email
+        session.userID = result[0]._id
         session.userType = 'doctor'
         res.redirect('/doctor/dashboard')
       } else {
@@ -67,14 +67,27 @@ router.post('/logout', (req, res) => {
 
 router.get('/dashboard', protectLogin, (req, res) => {
   const user = session.userID
-  const q = `SELECT * FROM doctor WHERE email = "${user}"`
+  const q = `SELECT * FROM doctor WHERE _id = "${user}"`
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     }
     const doctor = result[0]
-    res.render('./pages/doctorDashboard', { doctor, warning: req.flash('warning') })
+    const que = `SELECT appointment._id AS id, patient.fname, patient.lname, appointment.Date, appointment.time, appointment.age, appointment.details, patient.gender, appointment.details FROM appointment, patient, doctor WHERE doctor._id = appointment.doc_id AND appointment.pat_id = patient._id AND  appointment.doc_id = "${user}" AND appointment.doc_s = "0"`;
+    connection.query(que, (e, resu) => {
+      if (e) {
+        console.log(e)
+        req.flash('error', 'An error has occured! Please contact admin')
+        res.redirect('/')
+      }
+      const appData = resu
+      res.render('./pages/doctorDashboard', {
+        doctor,
+        appData,
+        warning: req.flash('warning')
+      })
+    })
   })
 })
 
