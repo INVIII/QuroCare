@@ -81,11 +81,10 @@ router.get('/dashboard', protectLogin, (req, res) => {
         res.redirect('/')
         // console.log(err1)
       }
-      const name = result1;
+      const name = result1
       res.render('./pages/patientDash', { name, patient, warning: req.flash('warning'), success: req.flash('success') })
       // console.log(name)
     })
-    
   })
 })
 
@@ -111,28 +110,27 @@ router.post('/register', async (req, res, next) => {
       throw err
     }
 
-    if (result1.length > 0) {      
+    if (result1.length > 0) {
       req.flash('warning', 'This email is already registered!')
       res.redirect('/patient/register')
     } else {
       const hash = await bcrypt.hash(pass, 12)
       const id = nanoid()
-  
+
       const q = `INSERT INTO patient (_id, fname, lname, email, phone, gender, password, admitted) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${gender}', '${hash}', 0)`
-  
+
       connection.query(q, (err1, result) => {
         if (err1) {
           req.flash('error', 'An error has occured! Please contact admin')
           res.redirect('/')
-        }      
-  
+        }
+
         session.userID = id
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
       })
     }
-    
-  })  
+  })
 })
 
 router.get('/appointment', protectLogin, (req, res) => {
