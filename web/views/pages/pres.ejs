@@ -1,5 +1,5 @@
-<%- include('../partials/auth-head.ejs') %> 
-<% if (warning && warning.length) { %>
+<%- include('../partials/auth-head.ejs') %> <% if (warning && warning.length) {
+%>
 <div
   class="
     myAlert-bottom
@@ -33,35 +33,34 @@
 </button>
 
 <div class="main d-flex flex-column justify-content-center align-items-center">
-    <div class="form-cont row">
+  <div class="form-cont row">
     <div class="reg col-6 d-flex flex-column">
       <img src="/images/toplogo.png" alt="logo" class="logo" />
       <div class="login-title text-center">Prescribe</div>
 
       <form class="row" action="/doctor/prescribe" method="POST">
-        
         <div class="col-12">
-            <label class="form-label" for="patient" name="patient">Patient</label>
-            <input
-              class="form-control"
-              id="patient"
-              name="patient"
-              type="text"
-              value="<%= p_name %> "
-              required
-              disabled
-            />
-          </div>
-
+          <label class="form-label" for="patient" name="patient">Patient</label>
           <input
-              class="form-control hide"
-              id="appId"
-              name="appId"
-              type="text"
-              value="<%= appId %> "
-              required
-            />
-        
+            class="form-control"
+            id="patient"
+            name="patient"
+            type="text"
+            value="<%= p_name %> "
+            required
+            disabled
+          />
+        </div>
+
+        <input
+          class="form-control hide"
+          id="appId"
+          name="appId"
+          type="text"
+          value="<%= appId %> "
+          required
+        />
+
         <div class="col-12">
           <label class="form-label" for="disease" name="disease">Disease</label>
           <input
@@ -74,7 +73,9 @@
           />
         </div>
         <div class="col-12">
-          <label class="form-label" for="allergy" name="allergy">Allergies</label>
+          <label class="form-label" for="allergy" name="allergy"
+            >Allergies</label
+          >
           <input
             class="form-control"
             id="allergy"
@@ -85,55 +86,68 @@
           />
         </div>
         <div class="col-12">
-            <label class="form-label" for="feedback" name="feedback">Feedback</label>
-            <input
-              class="form-control"
-              id="feedback"
-              name="feedback"
-              type="text"
-              placeholder="Enter additional feedback"
-              required
-            />
-        </div>        
+          <label class="form-label" for="feedback" name="feedback"
+            >Feedback</label
+          >
+          <input
+            class="form-control"
+            id="feedback"
+            name="feedback"
+            type="text"
+            placeholder="Enter additional feedback"
+            required
+          />
+        </div>
+        <div class="form-check form-switch col-12 mt-4" style="margin-left: 10px;">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="admit"
+            id="admit"
+            value="admit"
+          />
+          <label class="form-check-label" for="admit"
+            >Recommend admin to admit patient</label
+          >
+        </div>
         <div class="col-12 mt-4">
           <button class="btn btn-primary">Prescribe</button>
         </div>
-      </form>      
-      <div class="des mt-4 text-center">        
+      </form>
+      <div class="des mt-4 text-center">
         <a href="/doctor/dashboard">Back to dashboard</a>
       </div>
-      
     </div>
     <div class="col-6 image-part"></div>
+  </div>
+
+  <script>
+    const form = document.querySelector(".reg");
+
+    window.addEventListener("load", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
+  </script>
+
+  <%- include('../partials/foot.ejs') %>
 </div>
-
-
-<script>
-  const form = document.querySelector(".reg");
-
-  window.addEventListener("load", () => {
-    if (window.innerWidth <= 1200) {
-      form.classList.add("col-12");
-      form.classList.remove("col-6");
-      form.classList.add("align-items-center");
-    } else {
-      form.classList.add("col-6");
-      form.classList.remove("col-12");
-      form.classList.remove("align-items-center");
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth <= 1200) {
-      form.classList.add("col-12");
-      form.classList.remove("col-6");
-      form.classList.add("align-items-center");
-    } else {
-      form.classList.add("col-6");
-      form.classList.remove("col-12");
-      form.classList.remove("align-items-center");
-    }
-  });
-</script>
-
-<%- include('../partials/foot.ejs') %>
