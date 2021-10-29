@@ -1,3 +1,4 @@
+const e = require('express')
 const express = require('express')
 const router = express.Router()
 const connection = require('../utils/sqlConnector')
@@ -13,43 +14,44 @@ router.get('/admin', (req, res) => {
 router.get('/allocateroom', (req, res) => {
   let q = 'SELECT * From waiting'
   let rooms = []
-  const pat = []
+  // eslint-disable-next-line prefer-const
+  let pat = []
   connection.query(q, (err, result) => {
     if (err) {
       console.log(err)
       req.flash('error', 'An error has occured please contact Admin')
       res.redirect('/')
     } else {
-      result.forEach(async (waiting) => {
-        const docID = waiting.doc_id
-        const patID = waiting.pat_id
-        q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, patient._id AS pat_id, doctor.fname AS d_fname, doctor.lname AS d_lname FROM patient, doctor WHERE doctor._id = '${docID}' AND patient._id = '${patID}'`
-        connection.query(q, (err, result1) => {
-          if (err) {
-            console.log(err)
-            req.flash('error', 'An error has occured please contact Admin')
-            res.redirect('/')
-          } else {
-            pat.push(result1)
-          }
-        })
-      })
       q = 'SELECT roomid FROM room WHERE room.occupied = 0'
       connection.query(q, (err1, result1) => {
         if (err) {
           console.log(err)
           req.flash('error', 'An error has occured please contact Admin')
           res.redirect('/')
+        } else {
+          result.forEach((waiting) => {
+            const docID = waiting.doc_id
+            const patID = waiting.pat_id
+            q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, patient._id AS pat_id, doctor.fname AS d_fname, doctor.lname AS d_lname, waiting._id as waitingId FROM patient, doctor, waiting WHERE waiting._id = '${waiting._id}' AND doctor._id = '${docID}' AND patient._id = '${patID}'`
+            connection.query(q, (err, result2) => {
+              if (err) {
+                console.log(err)
+                req.flash('error', 'An error has occured please contact Admin')
+                res.redirect('/')
+              } else {
+                pat.push(result2)
+              }
+            })
+          })
+          rooms = result1
+          if (!rooms || rooms.length === 0) {
+            req.flash('warning', 'There are currently no free rooms')
+          }
+          res.render('./pages/allocateroom', { pat, rooms, warning: req.flash('warning') })
         }
-        rooms = result1
       })
-      res.render('./pages/allocateroom', { pat, rooms })
     }
   })
-})
-
-router.post('/allocateroom', (req, res) => {
-  res.redirect('/allocateroom')
 })
 
 router.get('/addroom', (req, res) => {
@@ -83,4 +85,46 @@ router.post('/addroom', (req, res) => {
     }
   })
 })
+
+router.post('/allocateroom', (req, res) => {
+  const { patient, room } = req.body
+  let q = `INSERT INTO occupies (pat_id, roomid) VALUES ('${patient}','${room}')`
+  connection.query(q, (err1, result1) => {
+    if (err1) {
+      console.log(err1)
+      req.flash('error', 'An error has occured please contact Admin')
+      res.redirect('/')
+    } else {
+      q = `DELETE FROM waiting WHERE pat_id = '${patient}`
+      connection.query(q, (err1, result2) => {
+        if (err1) {
+          console.log(err1)
+          req.flash('error', 'An error has occured please contact Admin')
+          res.redirect('/')
+        } else {
+          q = `UPDATE patient SET admitted = 1 WHERE _id = '${patient}'`
+          connection.query(q, (err1, result3) => {
+            if (err1) {
+              console.log(err1)
+              req.flash('error', 'An error has occured please contact Admin')
+              res.redirect('/')
+            } else {
+              q = `UPDATE room SET occupied = 1 WHERE roomid = '${room}`
+              connection.query(q, (err1, result4) => {
+                if (err1) {
+                  console.log(err1)
+                  req.flash('error', 'An error has occured please contact Admin')
+                  res.redirect('/')
+                } else {
+                  res.redirect('/allocateroom')
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
 module.exports = router
