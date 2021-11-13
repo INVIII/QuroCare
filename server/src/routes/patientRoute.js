@@ -37,6 +37,7 @@ router.post('/login', async (req, res) => {
   const q = `SELECT password, _id FROM patient WHERE email = "${email}" `
   connection.query(q, async (err, result) => {
     if (err) {
+      console.log(err)
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     } else {
@@ -82,7 +83,22 @@ router.get('/dashboard', protectLogin, (req, res) => {
         // console.log(err1)
       }
       const name = result1
-      res.render('./pages/patientDash', { name, patient, warning: req.flash('warning'), success: req.flash('success') })
+      q = 'SELECT * FROM room WHERE occupied=0'
+      connection.query(q, (err2, result2) => {
+        if (err2) {
+          req.flash('error', 'An error has occured! Please contact admin')
+          res.redirect('/')
+        } else {
+          const beds = result2
+          res.render('./pages/patientDash', {
+            name,
+            patient,
+            beds,
+            warning: req.flash('warning'),
+            success: req.flash('success')
+          })
+        }
+      })
       // console.log(name)
     })
   })
@@ -160,14 +176,16 @@ const getT = (dat) => {
   switch (dat) {
     case 1:
       return '9:30'
+      break
     case 2:
       return '12:30'
+      break
     case 3:
       return '3:30'
+      break
     case 4:
       return '5:00'
-    default:
-      return '12:30'
+      break
   }
 }
 
@@ -175,14 +193,16 @@ const getA = (ag) => {
   switch (ag) {
     case 1:
       return 'Infant'
+      break
     case 2:
       return 'Child'
+      break
     case 3:
       return 'Adult'
+      break
     case 4:
       return 'Senior Citizen'
-    default:
-      return 'Adult'
+      break
   }
 }
 
@@ -218,6 +238,41 @@ router.post('/appointment', (req, res) => {
       req.flash('success', 'Appointment have been added')
       res.redirect('/patient/dashboard')
     })
+  })
+})
+
+router.get('/prescription', protectLogin, (req, res) => {
+  // get doctors name disease allergies and feedback and show them on the table
+  // if required date also
+  const patId = session.userID
+  let q = `SELECT doctor.fname AS fname, doctor.lname AS lname, disease, allergies, feedback FROM doctor,prescription WHERE doctor._id = prescription.doc_id AND prescription.pat_id = '${patId}'`
+  connection.query(q, (err, result) => {
+    if (err) {
+      const newLocal = 'An error has occured! Please contact admin'
+      req.flash('error', newLocal)
+      console.log(err)
+      res.redirect('/')
+    } else {
+      const prescription = result
+      const patID = session.userID
+      q = `SELECT patient.fname, patient.lname FROM patient WHERE _id = "${patID}"`
+      connection.query(q, (err1, result1) => {
+        if (err1) {
+          const newLocal = 'An error has occured! Please contact admin'
+          req.flash('error', newLocal)
+          console.log(err1)
+          res.redirect('/')
+        } else {
+          const name = result1
+          res.render('./pages/prescription', {
+            name,
+            prescription,
+            warning: req.flash('warning'),
+            success: req.flash('success')
+          })
+        }
+      })
+    }
   })
 })
 
