@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     }
-    if (result.length === 0) {
+    if (!result || result.length === 0) {
       console.log('User Not Found')
       req.flash('error', 'User Not Found!')
       res.redirect('/doctor/login')
