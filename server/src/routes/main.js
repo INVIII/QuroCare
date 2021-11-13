@@ -12,42 +12,32 @@ router.get('/admin', (req, res) => {
 })
 
 router.get('/allocateroom', (req, res) => {
-  let q = 'SELECT * From waiting'
+  // eslint-disable-next-line no-unused-vars
   let rooms = []
-  // eslint-disable-next-line prefer-const
-  let pat = []
-  connection.query(q, (err, result) => {
-    if (err) {
-      console.log(err)
+  let q = 'SELECT roomid FROM room WHERE room.occupied = 0'
+  connection.query(q, (err1, result1) => {
+    if (err1) {
+      console.log(err1)
       req.flash('error', 'An error has occured please contact Admin')
       res.redirect('/')
     } else {
-      q = 'SELECT roomid FROM room WHERE room.occupied = 0'
-      connection.query(q, (err1, result1) => {
+      rooms = result1
+      q = 'SELECT patient.fname AS p_fname, patient.lname AS p_lname, patient._id AS pat_id, doctor.fname AS d_fname, doctor.lname AS d_lname, waiting._id as waitingId FROM patient, doctor, waiting WHERE waiting.pat_id = patient._id AND waiting.doc_id = doctor._id'
+      connection.query(q, (err, result2) => {
         if (err) {
           console.log(err)
           req.flash('error', 'An error has occured please contact Admin')
           res.redirect('/')
         } else {
-          result.forEach((waiting) => {
-            const docID = waiting.doc_id
-            const patID = waiting.pat_id
-            q = `SELECT patient.fname AS p_fname, patient.lname AS p_lname, patient._id AS pat_id, doctor.fname AS d_fname, doctor.lname AS d_lname, waiting._id as waitingId FROM patient, doctor, waiting WHERE waiting._id = '${waiting._id}' AND doctor._id = '${docID}' AND patient._id = '${patID}'`
-            connection.query(q, (err, result2) => {
-              if (err) {
-                console.log(err)
-                req.flash('error', 'An error has occured please contact Admin')
-                res.redirect('/')
-              } else {
-                pat.push(result2)
-              }
-            })
-          })
-          rooms = result1
-          if (!rooms || rooms.length === 0) {
+          const pat = result2
+          if (rooms.length === 0) {
             req.flash('warning', 'There are currently no free rooms')
           }
-          res.render('./pages/allocateroom', { pat, rooms, warning: req.flash('warning') })
+          res.render('./pages/allocateroom', {
+            pat,
+            rooms,
+            warning: req.flash('warning')
+          })
         }
       })
     }
@@ -95,7 +85,7 @@ router.post('/allocateroom', (req, res) => {
       req.flash('error', 'An error has occured please contact Admin')
       res.redirect('/')
     } else {
-      q = `DELETE FROM waiting WHERE pat_id = '${patient}`
+      q = `DELETE FROM waiting WHERE pat_id = '${patient}'`
       connection.query(q, (err1, result2) => {
         if (err1) {
           console.log(err1)
@@ -109,7 +99,7 @@ router.post('/allocateroom', (req, res) => {
               req.flash('error', 'An error has occured please contact Admin')
               res.redirect('/')
             } else {
-              q = `UPDATE room SET occupied = 1 WHERE roomid = '${room}`
+              q = `UPDATE room SET occupied = 1 WHERE roomid = '${room}'`
               connection.query(q, (err1, result4) => {
                 if (err1) {
                   console.log(err1)
