@@ -4,6 +4,7 @@ const path = require('path')
 const mainRoutes = require('./routes/main.js')
 const doctorRoutes = require('./routes/doctorRoutes.js')
 const patientRoutes = require('./routes/patientRoute.js')
+const adminRoutes = require('./routes/adminRoutes.js')
 const session = require('express-session')
 const flash = require('connect-flash')
 
@@ -22,6 +23,7 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/doctor', doctorRoutes)
 app.use('/patient', patientRoutes)
+app.use('/admin', adminRoutes)
 
 app.get('*', (req, res) => {
   res.render('./pages/404')

@@ -107,6 +107,7 @@ router.get('/dashboard', protectLogin, (req, res) => {
           })
         }
       })
+      // console.log(name)
     })
   })
 })
