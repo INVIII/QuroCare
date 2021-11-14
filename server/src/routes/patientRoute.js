@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
       } else if (!validEmail) {
-        req.flash('error', 'Wrong Password!')
+        req.flash('error', 'Email not registered!')
         res.redirect('/patient/login')
       } else {
         req.flash('error', 'Wrong Password!')
