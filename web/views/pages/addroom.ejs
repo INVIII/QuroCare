@@ -1,0 +1,120 @@
+<%- include('../partials/auth-head.ejs') %> <% if (success && success.length) { %>
+<div
+  class="
+    myAlert-bottom
+    alert alert-success
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Success:"
+    >
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+    <%= success %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
+</div>
+<% } else if (warning && warning.length) { %>
+<div
+  class="
+    myAlert-bottom
+    alert alert-warning
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Warning:"
+    >
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <%= warning %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
+</div>
+<% } %>
+
+<button onclick="location.href='/' " class="btn1">
+  <i class="fa fa-home"></i>
+</button>
+
+<div class="main d-flex flex-column justify-content-center align-items-center">
+  <div class="form-cont row">
+    <div class="reg col-6 d-flex flex-column">
+      <img src="/images/toplogo.png" alt="logo" class="logo" />
+      <div class="login-title text-center">Add Room</div>
+      <form class="row" action="/addroom" method="POST">
+        <div class="col-12 mt-4">
+          <label class="form-label" for="roomID" name="disease">Room ID</label>
+          <label for="roomID"></label>
+          <input
+            type="text"
+            name="roomID"
+            id="roomID"
+            class="form-control"
+            placeholder="of the type GW-01"
+            required
+          />
+        </div>
+
+        <div class="col-12 mt-4">
+          <button class="btn btn-primary">Add Room</button>
+        </div>
+      </form>
+      <div class="des mt-4 text-center">
+        <a href="/admin">Back to dashboard</a>
+      </div>
+    </div>
+    <div class="col-6 image-part"></div>
+  </div>
+
+  <script>
+    const form = document.querySelector(".reg");
+
+    window.addEventListener("load", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 1200) {
+        form.classList.add("col-12");
+        form.classList.remove("col-6");
+        form.classList.add("align-items-center");
+      } else {
+        form.classList.add("col-6");
+        form.classList.remove("col-12");
+        form.classList.remove("align-items-center");
+      }
+    });
+  </script>
+
+  <%- include('../partials/foot.ejs') %>
+</div>

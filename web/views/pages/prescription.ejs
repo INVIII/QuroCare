@@ -204,140 +204,43 @@
                 </li>
                 <li class="breadcrumb-item active">Doctors</li>
             </ol>
-            <!-- Icon Cards-->
-            <div class="row">
-                <div class="col-lg-4 col-md-4" >
-                    <div class="card text-white bg-primary o-hidden h-100" onclick="location.href = '/patient/appointment'">
-                        <div class="card-body blue-hover">
-                            <div class="card-body-icon">
-                                <i class="fa fa-calendar fa-3x"></i>
-                            </div>
-                            <div class="mr-5">
-                                <h4>New Booking?</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="card text-white bg-warning o-hidden h-100" onclick="location.href = '/patient/prescription'">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fa fa-arrow-left fa-3x"></i>
-                            </div>
-                            <div class="mr-5">
-                                <h4>Prescriptions</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="card text-white bg-success o-hidden h-100">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fa fa-hospital-o fa-3x"></i>
-                            </div>
-                            <div class="mr-5">
-                                <h4><%- beds.length %> Free Beds!</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
 
 
             <!-- Table with patients in rooms-->
             <div class="row" style="margin-top: 50px">
-                <div class="table-responsive col-md-6">
+                <div class="table-responsive col-md-12">
                     <div class="card-header">
-                        <i class="fa fa-table"></i> Upcoming Checkups
+                        <i class="fa fa-table"></i> Prescriptions
                     </div>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>                                
                                 <th>Sr No.</th>
-                                <th>Department</th>
-                                <th>Doctor</th>
-                                <th>Date</th>                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% if (patient && patient.length !== 0)  { %> 
-                            <% let index = 0 %> 
-                            <% for (let i of patient) {%> 
-                            <tr>
-                                <td><%- index+=1 %> </td>
-                                <td><%- i.department %> </td>
-                                <td><%- (i.fname + " " + i.lname) %></td>
-                                <% const temp = String(i.Date).substring(0, 15) %> 
-                                <td><%- temp %></td>  
-                            </tr>
-                            <% } %>
-                            <% } %>                              
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-responsive col-md-4">
-                    <div class="card-header">
-                        <i class="fa fa-table"></i> Past Checkups
-                    </div>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Doctor </th>
+                                <th>Doctor's Name</th>
                                 <th>Disease</th>
+                                <th>Allergies</th>
+                                <th>Feedback</th>                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
+                            <% if (prescription && prescription.length !== 0)  { %> 
+                                <% let index = 0 %> 
+                                <% for (let i of prescription) {%> 
+                                <tr>
+                                    <td><%- index+=1 %> </td>
+                                    <td><%- (i.fname + " " + i.lname) %></td>
+                                    <td><%- i.disease %></td>
+                                    <td><%- i.allergies %></td>
+                                    <td><%- i.feedback %></td>
+                                </tr>
+                                <% } %>
+                            <% } else { %> 
+                                There are no Prescriptions
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-2">
-                    <div class="card-header">
-                        <i class="fa fa-table"></i> OPD Details
-                    </div>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Free Rooms</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ICU-15</td>
-                            </tr>
-                            <tr>
-                                <td>GW-21</td>
-                            </tr>
-                            <tr>
-                                <td>GW-15</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                
             </div>
 
             <!-- Logout Modal-->
