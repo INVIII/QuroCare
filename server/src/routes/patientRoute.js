@@ -41,12 +41,20 @@ router.post('/login', async (req, res) => {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     } else {
-      password = result[0].password
-      const isCorrect = await bcrypt.compare(pass, password)
+      let isCorrect = 0
+      let validEmail = 0
+      if (result.length !== 0) {
+        password = result[0].password
+        validEmail = 1
+        isCorrect = await bcrypt.compare(pass, password)
+      }
       if (isCorrect) {
         session.userID = result[0]._id
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
+      } else if (!validEmail) {
+        req.flash('error', 'Wrong Password!')
+        res.redirect('/patient/login')
       } else {
         req.flash('error', 'Wrong Password!')
         // console.log('Wrong Password')
@@ -99,7 +107,6 @@ router.get('/dashboard', protectLogin, (req, res) => {
           })
         }
       })
-      // console.log(name)
     })
   })
 })
