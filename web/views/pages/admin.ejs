@@ -31,7 +31,7 @@
         data-placement="right"
         title="Dashboard"
       >
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="./dashboard">
           <i class="fa fa-fw fa-dashboard"></i>
           <span class="nav-link-text">Dashboard</span>
         </a>
@@ -42,7 +42,7 @@
         data-placement="right"
         title="addDoctor"
       >
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="./register">
           <i class="fa fa-fw fa-user-md"></i>
           <span class="nav-link-text">Add Doctor</span>
         </a>
@@ -225,11 +225,13 @@
           </thead>
           <tbody>
             <% if (freerooms && freerooms.length !== 0)  { %> 
-                                <% let index = 0 %> 
-                                <% for (let i of freerooms) {%>
-                                    <td><%- i.roomid %></td>
-                                <% } %>
-                            <% } %>
+                <% let index = 0 %> 
+                <% for (let i of freerooms) {%>
+                  <tr>
+                    <td><%- i.roomid %></td>
+                  </tr>
+              <% } %>
+            <% } %>
           </tbody>
         </table>
       </div>

@@ -1,12 +1,30 @@
-<%- include('../partials/auth-head.ejs') %>
-
-<% if (warning && warning.length) { %>  
-  <div class="myAlert-bottom alert alert-warning d-flex flex-row justify-content-between align-items-center">
-    <div class="d-flex flex-row justify-content-between align-items-center">
-        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-        <%= warning %> 
-    </div>
-  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close">&times;</a>
+<%- include('../partials/auth-head.ejs') %> <% if (warning && warning.length) {
+%>
+<div
+  class="
+    myAlert-bottom
+    alert alert-warning
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Warning:"
+    >
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <%= warning %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
 </div>
 <% } %>
 
@@ -105,21 +123,23 @@
         </div>
 
         <div class="row">
-            <div class="form-floating col-lg-12">
-              <label for="department">Department</label>
-              <input
-                type="department"
-                class="form-control"
-                id="department"
-                placeholder="department"
-                name="dep"
-                required
-              />
-            </div>            
+          <div class="form-floating col-lg-12">
+            <label for="department">Department</label>
+            <select class="form-select form-control" id="department" name = "department" required>
+              <option value="placeholder" selected disabled hidden>
+                Select a department
+              </option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Orthopaedic">Orthopaedic</option>
+              <option value="Neurologist">Neurologist</option>
+              <option value="Pharmacology">Pharmacology</option>
+              <option value="Physiology">Physiology</option>
+              <option value="Psychiatry">Psychiatry</option>
+            </select>
           </div>
-
+        </div>
         <div class="mt-4">
-          <button class="btn btn-primary" type="submit">Register</button>          
+          <button class="btn btn-primary" type="submit">Register</button>
         </div>
       </form>
     </div>
@@ -140,7 +160,7 @@
       form.classList.remove("col-12");
       form.classList.remove("align-items-center");
     }
-  })
+  });
 
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 1200) {

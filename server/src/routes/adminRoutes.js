@@ -1,6 +1,6 @@
-const express = require("express");
-const session = require("express-session");
-const connection = require("../utils/sqlConnector");
+const express = require('express')
+const session = require('express-session')
+const connection = require('../utils/sqlConnector')
 const { nanoid } = require('nanoid')
 
 const router = express.Router()
@@ -169,12 +169,12 @@ router.post('/register', async (req, res, next) => {
   })
 })
 
-router.get("/addroom", protectLogin, (req, res) => {
-  res.render("./pages/addroom", {
-    warning: req.flash("warning"),
-    success: req.flash("success"),
-  });
-});
+router.get('/addroom', protectLogin, (req, res) => {
+  res.render('./pages/addroom', {
+    warning: req.flash('warning'),
+    success: req.flash('success')
+  })
+})
 
 router.post('/addroom', (req, res) => {
   const { roomID } = req.body
