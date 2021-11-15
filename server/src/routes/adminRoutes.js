@@ -1,6 +1,7 @@
-const express = require('express')
-const session = require('express-session')
-const connection = require('../utils/sqlConnector')
+const express = require("express");
+const session = require("express-session");
+const connection = require("../utils/sqlConnector");
+const { nanoid } = require('nanoid')
 
 const router = express.Router()
 
@@ -137,12 +138,43 @@ router.get('/allocateroom', protectLogin, (req, res) => {
   })
 })
 
-router.get('/addroom', protectLogin, (req, res) => {
-  res.render('./pages/addroom', {
-    warning: req.flash('warning'),
-    success: req.flash('success')
+router.get('/register', protectLogin, (req, res) => {
+  res.render('./pages/docReg', { warning: req.flash('warning') })
+})
+
+router.post('/register', async (req, res, next) => {
+  const { fname, lname, email, phone, dep, fees, pass } = req.body
+
+  const q0 = `SELECT * FROM doctor WHERE email="${email}";`
+  connection.query(q0, async (err, result1) => {
+    if (err) {
+      throw err
+    }
+
+    if (result1.length > 0) {
+      req.flash('warning', 'This email is already registered!')
+      res.redirect('/admin/register')
+    } else {
+      const id = nanoid()
+      const q = `INSERT INTO doctor (_id, fname, lname, email, phone, department, password, fees) VALUES ('${id}', '${fname}', '${lname}', '${email}', '${phone}', '${dep}', '${pass}', '${fees}')`
+
+      connection.query(q, (err1, result) => {
+        if (err1) {
+          req.flash('error', 'An error has occured! Please contact admin')
+          res.redirect('/')
+        }
+        res.redirect('/admin/dashboard')
+      })
+    }
   })
 })
+
+router.get("/addroom", protectLogin, (req, res) => {
+  res.render("./pages/addroom", {
+    warning: req.flash("warning"),
+    success: req.flash("success"),
+  });
+});
 
 router.post('/addroom', (req, res) => {
   const { roomID } = req.body
