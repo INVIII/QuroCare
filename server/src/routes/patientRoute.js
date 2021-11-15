@@ -41,12 +41,20 @@ router.post('/login', async (req, res) => {
       req.flash('error', 'An error has occured! Please contact admin')
       res.redirect('/')
     } else {
-      password = result[0].password
-      const isCorrect = await bcrypt.compare(pass, password)
+      let isCorrect = 0
+      let validEmail = 0
+      if (result.length !== 0) {
+        password = result[0].password
+        validEmail = 1
+        isCorrect = await bcrypt.compare(pass, password)
+      }
       if (isCorrect) {
         session.userID = result[0]._id
         session.userType = 'patient'
         res.redirect('/patient/dashboard')
+      } else if (!validEmail) {
+        req.flash('error', 'Email not registered!')
+        res.redirect('/patient/login')
       } else {
         req.flash('error', 'Wrong Password!')
         // console.log('Wrong Password')
@@ -64,9 +72,9 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/dashboard', protectLogin, (req, res) => {
+router.get('/dashboard', protectLogin, async (req, res) => {
   const user = session.userID
-  let q = `SELECT doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment WHERE appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id`
+  let q = `SELECT doctor.fname, doctor.lname, doctor.department, appointment.Date FROM doctor, appointment WHERE appointment.pat_id = "${user}" AND doctor._id = appointment.doc_id AND appointment.doc_s = 0`
   connection.query(q, (err, result) => {
     if (err) {
       req.flash('error', 'An error has occured! Please contact admin')
@@ -84,18 +92,29 @@ router.get('/dashboard', protectLogin, (req, res) => {
       }
       const name = result1
       q = 'SELECT * FROM room WHERE occupied=0'
-      connection.query(q, (err2, result2) => {
+      connection.query(q, async (err2, result2) => {
         if (err2) {
           req.flash('error', 'An error has occured! Please contact admin')
           res.redirect('/')
         } else {
           const beds = result2
-          res.render('./pages/patientDash', {
-            name,
-            patient,
-            beds,
-            warning: req.flash('warning'),
-            success: req.flash('success')
+          q = `SELECT doctor.fname, doctor.lname, prescription.disease FROM doctor, prescription WHERE prescription.pat_id = '${user}' AND prescription.doc_id = doctor._id`
+          connection.query(q, (err3, result3) => {
+            if (err3) {
+              console.log(err3)
+              req.flash('error', 'An error has occured! Please contact admin')
+              res.redirect('/')
+            } else {
+              const prescription = result3
+              res.render('./pages/patientDash', {
+                name,
+                patient,
+                beds,
+                prescription,
+                warning: req.flash('warning'),
+                success: req.flash('success')
+              })
+            }
           })
         }
       })
