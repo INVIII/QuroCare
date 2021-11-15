@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
   })
 })
 
-router.get('/dashboard', protectLogin,async (req, res) => {
+router.get('/dashboard', protectLogin, async (req, res) => {
   let admitted, waiting, freerooms
 
   let q = 'SELECT patient.fname, patient.lname, room.roomid FROM occupies, patient, room WHERE room.roomid = occupies.roomid AND patient._id = occupies.pat_id'
