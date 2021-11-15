@@ -1,0 +1,172 @@
+<%- include('../partials/auth-head.ejs') %>
+
+<% if (warning && warning.length) { %>  
+  <div class="myAlert-bottom alert alert-warning d-flex flex-row justify-content-between align-items-center">
+    <div class="d-flex flex-row justify-content-between align-items-center">
+        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <%= warning %> 
+    </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
+<% } %>
+
+<button onclick="location.href='/' " class="btn1">
+  <i class="fa fa-home"></i>
+</button>
+
+<div class="main d-flex flex-column justify-content-center align-items-center">
+  <div class="form-cont row">
+    <div class="col-6 reg d-flex flex-column">
+      <img src="/images/toplogo.png" alt="logo" class="logo" />
+      <div class="login-title text-center">Register</div>
+      <form action="/admin/register" method="POST">
+        <div class="row">
+          <div class="form-floating col-lg-6">
+            <label for="fName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fName"
+              placeholder="eg. Dev"
+              required
+              name="fname"
+            />
+          </div>
+          <div class="form-floating col-lg-6">
+            <label for="LName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="LName"
+              placeholder="eg. Sharma"
+              required
+              name="lname"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-floating col-lg-12">
+            <label for="Email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="Email"
+              placeholder="eg. dev@gmail.com"
+              required
+              name="email"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-floating col-lg-6">
+            <label for="Phone"> Phone</label>
+            <input
+              type="text"
+              id="Phone"
+              class="form-control"
+              placeholder="+91 9999 99 9999"
+              name="phone"
+              required
+            />
+          </div>
+          <div class="form-floating col-lg-6">
+            <label for="fees" class="form-check-label">Fees</label><br />
+            <input
+              type="number"
+              id="fees"
+              class="form-control"
+              name="fees"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-floating col-lg-6">
+            <label for="Password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="Password"
+              placeholder="Password"
+              name="pass"
+              required
+            />
+          </div>
+          <div class="form-floating col-lg-6">
+            <label for="rePassword">Re-enter Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="rePassword"
+              placeholder="Re-enter Password"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="form-floating col-lg-12">
+              <label for="department">Department</label>
+              <input
+                type="department"
+                class="form-control"
+                id="department"
+                placeholder="department"
+                name="dep"
+                required
+              />
+            </div>            
+          </div>
+
+        <div class="mt-4">
+          <button class="btn btn-primary" type="submit">Register</button>          
+        </div>
+      </form>
+    </div>
+    <div class="col-6 image-part"></div>
+  </div>
+</div>
+
+<script>
+  const form = document.querySelector(".reg");
+
+  window.addEventListener("load", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  })
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 1200) {
+      form.classList.add("col-12");
+      form.classList.remove("col-6");
+      form.classList.add("align-items-center");
+    } else {
+      form.classList.add("col-6");
+      form.classList.remove("col-12");
+      form.classList.remove("align-items-center");
+    }
+  });
+
+  var password = document.getElementById("Password"),
+    confirm_password = document.getElementById("rePassword");
+
+  function validatePassword() {
+    if (password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity("");
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>
+
+<%- include('../partials/foot.ejs') %>
