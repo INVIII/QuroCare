@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start src/index.js --watch",
-    "stop": "pm2 kill"
+    "start": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
