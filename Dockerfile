@@ -14,7 +14,4 @@ RUN npm install
 
 COPY . .
 
-ENV PORT=3000
-EXPOSE 3000
-
-CMD ["forever", "-c", "node --harmony", "./server/src/index.js"]
+CMD ["forever", "-c", "node --harmony", "./server/src/index.js", "--bind 0.0.0.0:$PORT"]

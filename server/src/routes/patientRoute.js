@@ -106,7 +106,7 @@ router.get('/dashboard', protectLogin, async (req, res) => {
               res.redirect('/')
             } else {
               const prescription = result3
-              res.render('./pages/patientDash', {
+              res.render('./pages/patientdash', {
                 name,
                 patient,
                 beds,
