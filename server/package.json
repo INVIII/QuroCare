@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "pm2 start src/index.js --watch",
+    "stop": "pm2 kill"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +21,8 @@
     "faker": "^5.5.3",
     "mysql": "^2.18.1",
     "nanoid": "^3.1.25",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
