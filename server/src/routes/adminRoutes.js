@@ -59,8 +59,48 @@ router.post('/login', async (req, res) => {
   })
 })
 
-router.get('/dashboard', (req, res) => {
-  res.render('./pages/admin')
+router.get('/dashboard', protectLogin, async (req, res) => {
+  let admitted, waiting, freerooms
+
+  let q = 'SELECT patient.fname, patient.lname, room.roomid FROM occupies, patient, room WHERE room.roomid = occupies.roomid AND patient._id = occupies.pat_id'
+  connection.query(q, (err, result) => {
+    if (err) {
+      console.log(err)
+      req.flash('error', 'An error has occured please contact Admin')
+      res.redirect('/')
+    } else {
+      q = 'SELECT roomid FROM room WHERE occupied = 0'
+      connection.query(q, (err1, result1) => {
+        if (err1) {
+          console.log(err1)
+          req.flash('error', 'An error has occured please contact Admin')
+          res.redirect('/')
+        } else {
+          q =
+               'SELECT patient.fname AS pfname, patient.lname AS plname, doctor.fname AS dfname, doctor.lname AS dlname FROM waiting, doctor, patient WHERE patient._id = waiting.pat_id AND waiting.doc_id = doctor._id'
+          connection.query(q, (err2, result2) => {
+            if (err2) {
+              console.log(err1)
+              req.flash(
+                'error',
+                'An error has occured please contact Admin'
+              )
+              res.redirect('/')
+            } else {
+              admitted = result
+              freerooms = result1
+              waiting = result2
+              res.render('./pages/admin', {
+                admitted,
+                freerooms,
+                waiting
+              })
+            }
+          })
+        }
+      })
+    }
+  })
 })
 
 router.get('/allocateroom', protectLogin, (req, res) => {
