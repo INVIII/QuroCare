@@ -177,32 +177,19 @@
                     </div>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
-                                <th>Doctor </th>
-                                <th>Disease</th>
-                            </tr>
+                            <th>Doctor</th>
+                            <th>Disease</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Nishant</td>
-                                <td>Covid-19</td>
-                            </tr>
+                            <% if (prescription && prescription.length !== 0)  { %> 
+                                <% let index = 0 %> 
+                                <% for (let i of prescription) {%>
+                                    <tr>
+                                        <td><%- i.fname + ' ' + i.lname %></td>
+                                        <td><%- i.disease %></td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -220,7 +207,7 @@
                             <% if (beds && beds.length !== 0)  { %> 
                                 <% let index = 0 %> 
                                 <% for (let i of beds) {%>
-                                    <tr><%- i.roomid %></tr>
+                                    <td><%- i.roomid %></td>
                                 <% } %>
                             <% } %>
                         </tbody>

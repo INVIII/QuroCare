@@ -40,11 +40,33 @@
         class="nav-item"
         data-toggle="tooltip"
         data-placement="right"
-        title="addPatient"
+        title="addDoctor"
       >
         <a class="nav-link" href="index.html">
+          <i class="fa fa-fw fa-user-md"></i>
+          <span class="nav-link-text">Add Doctor</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="addroom"
+      >
+        <a class="nav-link" href="./addroom">
           <i class="fa fa-fw fa-wheelchair"></i>
-          <span class="nav-link-text">Add Patient</span>
+          <span class="nav-link-text">Add Room</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="allocateRoom"
+      >
+        <a class="nav-link" href="./allocateroom">
+          <i class="fa fa-fw fa-wheelchair"></i>
+          <span class="nav-link-text"> Allocate Rooms </span>
         </a>
       </li>
       <li
@@ -94,7 +116,7 @@
               <i class="fa fa-hotel fa-3x"></i>
             </div>
             <div class="mr-5">
-              <h4>13 Patients Admitted</h4>
+              <h4><%- admitted.length %> Patients Admitted</h4>
             </div>
           </div>
         </div>
@@ -106,7 +128,7 @@
               <i class="fa fa-child fa-3x"></i>
             </div>
             <div class="mr-5">
-              <h4>5 Patients Waiting</h4>
+              <h4><%- waiting.length %> Patients Waiting</h4>
             </div>
           </div>
         </div>
@@ -118,7 +140,7 @@
               <i class="fa fa-hospital-o fa-3x"></i>
             </div>
             <div class="mr-5">
-              <h4>3 Free Beds!</h4>
+              <h4><%- freerooms.length %> Free Beds!</h4>
             </div>
           </div>
         </div>
@@ -140,54 +162,21 @@
         >
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>Disease</th>
-              <th>Date</th>
+              <th>Patient Name</th>
+              <th>Room ID</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-              <td>18-45y</td>
-              <td>Male</td>
-              <td>PTSD</td>
-              <td>12/03/2021</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-              <td>18-45y</td>
-              <td>Male</td>
-              <td>PTSD</td>
-              <td>12/03/2021</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-              <td>18-45y</td>
-              <td>Male</td>
-              <td>PTSD</td>
-              <td>12/03/2021</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-              <td>18-45y</td>
-              <td>Male</td>
-              <td>PTSD</td>
-              <td>12/03/2021</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-              <td>18-45y</td>
-              <td>Male</td>
-              <td>PTSD</td>
-              <td>12/03/2021</td>
+              <% if (admitted && admitted.length !== 0)  { %> 
+                <% let index = 0 %> 
+                  <% for (let i of admitted) {%>
+                      <tr>
+                        <td><%- i.fname + ' ' + i.lname %></td>
+                        <td><%- i.roomid %></td>
+                      </tr>
+                  <% } %>
+              <% } %>
             </tr>
           </tbody>
         </table>
@@ -204,31 +193,20 @@
         >
           <thead>
             <tr>
-              <th>Patient #</th>
-              <th>Name</th>
+              <th>Patient Name</th>
+              <th>Recommended By</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-            </tr>
-            <tr>
-              <td>Ayush Anand</td>
-              <td>Mumbai, Maharashtra</td>
-            </tr>
+            <% if (waiting && waiting.length !== 0)  { %> 
+                <% let index = 0 %> 
+                  <% for (let i of waiting) {%>
+                      <tr>
+                        <td><%- i.pfname + ' ' + i.plname %></td>
+                        <td><%- i.dfname + ' ' + i.dlname %></td>
+                      </tr>
+                  <% } %>
+              <% } %>
           </tbody>
         </table>
       </div>
@@ -246,15 +224,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>ICU-15</td>
-            </tr>
-            <tr>
-              <td>GW-21</td>
-            </tr>
-            <tr>
-              <td>GW-15</td>
-            </tr>
+            <% if (freerooms && freerooms.length !== 0)  { %> 
+                                <% let index = 0 %> 
+                                <% for (let i of freerooms) {%>
+                                    <td><%- i.roomid %></td>
+                                <% } %>
+                            <% } %>
           </tbody>
         </table>
       </div>
