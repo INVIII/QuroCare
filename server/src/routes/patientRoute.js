@@ -192,37 +192,41 @@ router.get('/appointment', protectLogin, (req, res) => {
 })
 
 const getT = (dat) => {
+  let pat = ''
   switch (dat) {
     case 1:
-      return '9:30'
+      pat = '9:30'
       break
     case 2:
-      return '12:30'
+      pat = '12:30'
       break
     case 3:
-      return '3:30'
+      pat = '3:30'
       break
     case 4:
-      return '5:00'
+      pat = '5:00'
       break
   }
+  return pat
 }
 
 const getA = (ag) => {
+  let age = ''
   switch (ag) {
     case 1:
-      return 'Infant'
+      age = 'Infant'
       break
     case 2:
-      return 'Child'
+      age = 'Child'
       break
     case 3:
-      return 'Adult'
+      age = 'Adult'
       break
     case 4:
       return 'Senior Citizen'
       break
   }
+  return age
 }
 
 router.post('/appointment', (req, res) => {

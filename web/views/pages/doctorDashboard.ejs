@@ -160,8 +160,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Address</th>
-                                <th>Age</th>
                                 <th>Gender</th>
                                 <th>Details</th>
                                 <th>Date</th>
@@ -173,8 +171,6 @@
                             <% for (let i of appData) {%> 
                             <tr>
                                 <td><%- i.fname + ' ' + i.lname %></td>
-                                <td><%- i.address %></td>
-                                <td><%- i.age %></td>
                                 <td><%- i.gender %></td>
                                 <td><%- i.details %></td>
                                 <% const temp = String(i.Date).substring(0,15) %>
