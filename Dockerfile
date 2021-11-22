@@ -10,7 +10,7 @@ COPY package.json .
 COPY package-lock.json .
 
 RUN npm i forever -g
-RUN npm install
+RUN npm i
 
 COPY . .
 
