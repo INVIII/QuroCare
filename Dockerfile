@@ -9,9 +9,10 @@ COPY ./server/package-lock.json ./server
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm i forever -g
 RUN npm i
-
 COPY . .
 
-CMD ["forever", "-c", "node --harmony", "./server/src/index.js", "--bind 0.0.0.0:$PORT"]
+ENV PORT=3000
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
